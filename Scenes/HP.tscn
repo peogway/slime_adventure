@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwpmtm7xmxkgd"]
+
+[ext_resource type="Texture2D" uid="uid://hj7fwixntcal" path="res://Assets/Art/health.png" id="1_grdbl"]
+[ext_resource type="Script" uid="uid://bv3psh5a0r6cg" path="res://Scripts/hp.gd" id="1_sdp0f"]
+[ext_resource type="Shader" uid="uid://drexo2nxvowrm" path="res://Assets/Shaders/Shield.gdshader" id="2_3avt6"]
+[ext_resource type="AudioStream" uid="uid://o4tabj34hqk" path="res://Assets/Sounds/others/hp_pickup.mp3" id="4_kug5e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kug5e"]
+shader = ExtResource("2_3avt6")
+shader_parameter/rotation = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sdp0f"]
+radius = 25.0
+
+[node name="Hp" type="Area2D"]
+collision_mask = 3
+script = ExtResource("1_sdp0f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_kug5e")
+position = Vector2(0, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("1_grdbl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sdp0f")
+
+[node name="GetHP" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_kug5e")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,276 @@
+[gd_scene load_steps=24 format=3 uid="uid://dmq8j3n7np71b"]
+
+[ext_resource type="Shader" uid="uid://bkrhwvbwyaij1" path="res://Assets/Shaders/Setting.gdshader" id="1_lj4oq"]
+[ext_resource type="Script" uid="uid://jd6rdw3u0xlj" path="res://Scripts/pause_menu.gd" id="1_yxrls"]
+[ext_resource type="AudioStream" uid="uid://cnacqddmh1ans" path="res://Assets/Sounds/others/mouse-click.mp3" id="3_5w4ur"]
+[ext_resource type="Texture2D" uid="uid://dun6tlj76f8w" path="res://Assets/backgrounds/10.png" id="3_425uk"]
+[ext_resource type="Texture2D" uid="uid://djpfu8gw5qqmn" path="res://Assets/GUI/btn/pause.png" id="3_h171x"]
+[ext_resource type="Texture2D" uid="uid://bgqcw3y8ht2ma" path="res://Assets/GUI/level_select/bg.png" id="3_yxrls"]
+[ext_resource type="FontFile" uid="uid://craeahiq1gby2" path="res://Assets/Fonts/soup_of_justice/soupofjustice.ttf" id="4_gqxqw"]
+[ext_resource type="Texture2D" uid="uid://2kpcso2qe2bg" path="res://Assets/GUI/btn/music_off.png" id="4_mys0b"]
+[ext_resource type="Texture2D" uid="uid://op2qjqrhsrpr" path="res://Assets/GUI/btn/play.png" id="4_n6ygf"]
+[ext_resource type="Texture2D" uid="uid://kdkpbq51epmd" path="res://Assets/GUI/btn/sound.png" id="5_c7c70"]
+[ext_resource type="Texture2D" uid="uid://kxt2stiidp4p" path="res://Assets/GUI/btn/sound_off.png" id="6_pmvjn"]
+[ext_resource type="Texture2D" uid="uid://cayi86bm5xy0j" path="res://Assets/GUI/btn/misic.png" id="10_1363l"]
+[ext_resource type="PackedScene" uid="uid://bkbmwduxbkpi6" path="res://Scenes/HowToPlay.tscn" id="12_1363l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qwhev"]
+shader = ExtResource("1_lj4oq")
+shader_parameter/lod = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mys0b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h171x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n6ygf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pmvjn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c7c70"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1363l"]
+
+[sub_resource type="Animation" id="Animation_siy43"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect2:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ey1tb"]
+resource_name = "blur"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect2:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.886, 0.886]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yxrls"]
+_data = {
+&"RESET": SubResource("Animation_siy43"),
+&"blur": SubResource("Animation_ey1tb")
+}
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_yxrls")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.262932, 0.262932, 0.262932, 0.5)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_index = 4
+material = SubResource("ShaderMaterial_qwhev")
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Sprite2D" parent="TextureRect"]
+z_index = -1
+texture = ExtResource("3_425uk")
+
+[node name="PauseButton" type="TextureButton" parent="."]
+process_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -134.0
+offset_top = 28.0
+offset_right = -35.0
+offset_bottom = 127.0
+grow_horizontal = 0
+
+[node name="Pause" type="Sprite2D" parent="PauseButton"]
+z_index = 10
+position = Vector2(50, 50)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_h171x")
+
+[node name="Play" type="Sprite2D" parent="PauseButton"]
+z_index = 10
+position = Vector2(50, 50)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_n6ygf")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -308.0
+offset_right = 197.0
+offset_bottom = 268.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HowToPlay" parent="PanelContainer" instance=ExtResource("12_1363l")]
+position = Vector2(323, 313)
+
+[node name="Bg" type="Sprite2D" parent="PanelContainer"]
+z_index = 6
+position = Vector2(262, 295)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_yxrls")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="space2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 0.01)
+layout_mode = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="MusicButton" type="TextureButton" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+z_index = 8
+custom_minimum_size = Vector2(99, 99)
+layout_mode = 2
+stretch_mode = 0
+
+[node name="MusicOn" type="Sprite2D" parent="PanelContainer/VBoxContainer/HBoxContainer/MusicButton"]
+z_index = 8
+position = Vector2(50, 50)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_c7c70")
+
+[node name="MusicOff" type="Sprite2D" parent="PanelContainer/VBoxContainer/HBoxContainer/MusicButton"]
+z_index = 8
+position = Vector2(50, 50)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("6_pmvjn")
+
+[node name="SoundButton" type="TextureButton" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+z_index = 8
+custom_minimum_size = Vector2(99, 99)
+layout_mode = 2
+
+[node name="SoundOn" type="Sprite2D" parent="PanelContainer/VBoxContainer/HBoxContainer/SoundButton"]
+z_index = 8
+position = Vector2(50, 50)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("10_1363l")
+
+[node name="SoundOff" type="Sprite2D" parent="PanelContainer/VBoxContainer/HBoxContainer/SoundButton"]
+z_index = 8
+position = Vector2(50, 50)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_mys0b")
+
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
+z_index = 7
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_gqxqw")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mys0b")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_h171x")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_n6ygf")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pmvjn")
+text = "Resume"
+metadata/_edit_use_anchors_ = true
+
+[node name="Restart" type="Button" parent="PanelContainer/VBoxContainer"]
+z_index = 7
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_gqxqw")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c7c70")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_h171x")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_n6ygf")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pmvjn")
+text = "Restart"
+metadata/_edit_use_anchors_ = true
+
+[node name="HowToPlay" type="Button" parent="PanelContainer/VBoxContainer"]
+z_index = 7
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_gqxqw")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c7c70")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_h171x")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_n6ygf")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pmvjn")
+text = "How to play"
+metadata/_edit_use_anchors_ = true
+
+[node name="BackToMenu" type="Button" parent="PanelContainer/VBoxContainer"]
+z_index = 7
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_gqxqw")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c7c70")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_h171x")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_n6ygf")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1363l")
+text = "Back to menu"
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_yxrls")
+}
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5w4ur")
+
+[connection signal="mouse_entered" from="PauseButton" to="." method="_on_pause_button_mouse_entered"]
+[connection signal="mouse_exited" from="PauseButton" to="." method="_on_pause_button_mouse_exited"]
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/HBoxContainer/MusicButton" to="." method="_on_music_button_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/VBoxContainer/HBoxContainer/MusicButton" to="." method="_on_music_button_mouse_exited"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/MusicButton" to="." method="_on_music_button_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/HBoxContainer/SoundButton" to="." method="_on_sound_button_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/VBoxContainer/HBoxContainer/SoundButton" to="." method="_on_sound_button_mouse_exited"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/SoundButton" to="." method="_on_sound_button_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_mouse_exited"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Restart" to="." method="_on_restart_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/VBoxContainer/Restart" to="." method="_on_restart_mouse_exited"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/HowToPlay" to="." method="_on_how_to_play_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/VBoxContainer/HowToPlay" to="." method="_on_how_to_play_mouse_exited"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HowToPlay" to="." method="_on_how_to_play_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/BackToMenu" to="." method="_on_back_to_menu_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/VBoxContainer/BackToMenu" to="." method="_on_back_to_menu_mouse_exited"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/BackToMenu" to="." method="_on_back_to_menu_pressed"]

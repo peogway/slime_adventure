@@ -1,0 +1,237 @@
+[gd_scene load_steps=24 format=3 uid="uid://dsfdy3gwhsvh1"]
+
+[ext_resource type="Script" uid="uid://leom52y0ywll" path="res://Scripts/monster.gd" id="1_yyra8"]
+[ext_resource type="Texture2D" uid="uid://bnfc4qpcrfgq1" path="res://Assets/spritesheet_complete.png" id="2_brqr3"]
+[ext_resource type="Shader" uid="uid://ddx7jpgumrgxo" path="res://Assets/Shaders/hit_flash.tres" id="2_i0esf"]
+[ext_resource type="Texture2D" uid="uid://uyhye435pfd0" path="res://Assets/Art/healthbarUnder.png" id="3_fvjcv"]
+[ext_resource type="Texture2D" uid="uid://bqjluqlosbvgx" path="res://Assets/Art/healthbarProgress.png" id="4_i0esf"]
+[ext_resource type="Script" uid="uid://b355yon1t7vva" path="res://Scripts/healthBar.gd" id="5_wp20p"]
+[ext_resource type="AudioStream" uid="uid://dwtx6khmgjwt2" path="res://Assets/Sounds/others/chest/chest_drop.mp3" id="7_vqjk1"]
+[ext_resource type="Texture2D" uid="uid://d04m3l6qx84f2" path="res://Assets/Art/parachute.png" id="8_rof6c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wp20p"]
+shader = ExtResource("2_i0esf")
+shader_parameter/enable = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0esf"]
+atlas = ExtResource("2_brqr3")
+region = Rect2(1691, 70, 60, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wp20p"]
+atlas = ExtResource("2_brqr3")
+region = Rect2(1626, 915, 60, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqfq0"]
+atlas = ExtResource("2_brqr3")
+region = Rect2(1628, 846, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_li8cl"]
+atlas = ExtResource("2_brqr3")
+region = Rect2(1628, 782, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_faqp6"]
+atlas = ExtResource("2_brqr3")
+region = Rect2(1496, 722, 61, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usnnb"]
+atlas = ExtResource("2_brqr3")
+region = Rect2(1496, 852, 61, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqjk1"]
+atlas = ExtResource("2_brqr3")
+region = Rect2(1496, 528, 61, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rof6c"]
+atlas = ExtResource("2_brqr3")
+region = Rect2(1496, 659, 61, 58)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yyra8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0esf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wp20p")
+}],
+"loop": true,
+"name": &"frog_move",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0esf")
+}],
+"loop": true,
+"name": &"frog_stop",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqfq0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_li8cl")
+}],
+"loop": true,
+"name": &"ladybird_move",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqfq0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqfq0")
+}],
+"loop": true,
+"name": &"ladybird_stop",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_faqp6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usnnb")
+}],
+"loop": true,
+"name": &"worm_green_move",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_faqp6")
+}],
+"loop": true,
+"name": &"worm_green_stop",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqjk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rof6c")
+}],
+"loop": true,
+"name": &"worm_move",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqjk1")
+}],
+"loop": true,
+"name": &"worm_stop",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_brqr3"]
+height = 26.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wqfq0"]
+
+[sub_resource type="Animation" id="Animation_i0esf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enable")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_wp20p"]
+resource_name = "hit_flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enable")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i0esf"]
+_data = {
+&"RESET": SubResource("Animation_i0esf"),
+&"hit_flash": SubResource("Animation_wp20p")
+}
+
+[node name="Monster" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_yyra8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_wp20p")
+sprite_frames = SubResource("SpriteFrames_yyra8")
+animation = &"worm_stop"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 19)
+rotation = 4.71239
+shape = SubResource("CapsuleShape2D_brqr3")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1, 17)
+rotation = 4.71239
+shape = SubResource("CapsuleShape2D_wqfq0")
+
+[node name="RayVertical" type="RayCast2D" parent="."]
+position = Vector2(-23, -9)
+
+[node name="RayHorizontal" type="RayCast2D" parent="."]
+position = Vector2(17, 7)
+rotation = 1.5708
+scale = Vector2(0.95, 0.95)
+
+[node name="RayBody" type="RayCast2D" parent="."]
+position = Vector2(15.5, 17)
+rotation = 1.5708
+scale = Vector2(0.58, 0.58)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." node_paths=PackedStringArray("monster")]
+offset_left = -34.0
+offset_top = -18.0
+offset_right = 30.0
+offset_bottom = 22.0
+value = 100.0
+fill_mode = 1
+texture_under = ExtResource("3_fvjcv")
+texture_progress = ExtResource("4_i0esf")
+script = ExtResource("5_wp20p")
+monster = NodePath("..")
+
+[node name="HurtTimer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_i0esf")
+}
+
+[node name="Effect" type="Node2D" parent="."]
+
+[node name="ChestDrop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_vqjk1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -28)
+texture = ExtResource("8_rof6c")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

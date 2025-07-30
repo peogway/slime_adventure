@@ -1,0 +1,377 @@
+[gd_scene load_steps=28 format=3 uid="uid://honmioa12jm3"]
+
+[ext_resource type="Script" uid="uid://xq7bc3lae7vo" path="res://Scripts/ui.gd" id="1_w371h"]
+[ext_resource type="Texture2D" uid="uid://bxpwa66g7p1k2" path="res://Assets/GUI/upgrade/time.png" id="2_nxvpl"]
+[ext_resource type="FontFile" uid="uid://craeahiq1gby2" path="res://Assets/Fonts/soup_of_justice/soupofjustice.ttf" id="3_dewlx"]
+[ext_resource type="Texture2D" uid="uid://dxgd3mdi25bl" path="res://Assets/GUI/pause/bg.png" id="4_hfhsn"]
+[ext_resource type="Texture2D" uid="uid://hj7fwixntcal" path="res://Assets/Art/health.png" id="4_wunin"]
+[ext_resource type="Texture2D" uid="uid://dk4ceorx06x7f" path="res://Assets/Art/skull-and-bones.png" id="5_j04uc"]
+[ext_resource type="Texture2D" uid="uid://bi1pqm6ske2ja" path="res://Assets/Player/Blue_Slime/Animation/Idle.png" id="5_qwshj"]
+[ext_resource type="Texture2D" uid="uid://c2b5oekuvioru" path="res://Assets/Player/Red_Slime/Animation/Idle.png" id="6_48q88"]
+[ext_resource type="Texture2D" uid="uid://u7hwy1ku5ox5" path="res://Assets/Art/coin.png" id="6_vqx31"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48q88"]
+atlas = ExtResource("5_qwshj")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjg7p"]
+atlas = ExtResource("5_qwshj")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mg6lk"]
+atlas = ExtResource("5_qwshj")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wunin"]
+atlas = ExtResource("5_qwshj")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j04uc"]
+atlas = ExtResource("5_qwshj")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqx31"]
+atlas = ExtResource("5_qwshj")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1goy"]
+atlas = ExtResource("5_qwshj")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n04ve"]
+atlas = ExtResource("5_qwshj")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wi7yl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48q88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjg7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mg6lk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wunin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j04uc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqx31")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1goy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n04ve")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wi7yl"]
+atlas = ExtResource("6_48q88")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5q4fb"]
+atlas = ExtResource("6_48q88")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqm5i"]
+atlas = ExtResource("6_48q88")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnovg"]
+atlas = ExtResource("6_48q88")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13dyv"]
+atlas = ExtResource("6_48q88")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r71lk"]
+atlas = ExtResource("6_48q88")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1ul7"]
+atlas = ExtResource("6_48q88")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pinj1"]
+atlas = ExtResource("6_48q88")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_68ajo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wi7yl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5q4fb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqm5i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnovg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13dyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r71lk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1ul7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pinj1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Ui" type="CanvasLayer"]
+script = ExtResource("1_w371h")
+
+[node name="Time" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 1, 1, 0)
+
+[node name="TimeContainer" type="HBoxContainer" parent="Time"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 14.0
+offset_right = 57.0
+offset_bottom = 54.0
+
+[node name="Clock" type="TextureRect" parent="Time/TimeContainer"]
+z_index = 2
+layout_mode = 2
+texture = ExtResource("2_nxvpl")
+expand_mode = 2
+
+[node name="space" type="Control" parent="Time/TimeContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Time" type="Label" parent="Time/TimeContainer"]
+z_index = 2
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="Slime1" type="ColorRect" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+color = Color(1, 1, 1, 0)
+
+[node name="StatsContainer" type="HBoxContainer" parent="Slime1"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 255.0
+offset_bottom = 35.0
+
+[node name="Life" type="TextureRect" parent="Slime1/StatsContainer"]
+z_index = 1
+layout_mode = 2
+texture = ExtResource("4_wunin")
+
+[node name="LifePoint" type="Label" parent="Slime1/StatsContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 25
+text = "0"
+
+[node name="space" type="Control" parent="Slime1/StatsContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Kills" type="TextureRect" parent="Slime1/StatsContainer"]
+z_index = 1
+layout_mode = 2
+texture = ExtResource("5_j04uc")
+expand_mode = 2
+
+[node name="KillsNum" type="Label" parent="Slime1/StatsContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 25
+text = "0"
+
+[node name="space2" type="Control" parent="Slime1/StatsContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Coins" type="TextureRect" parent="Slime1/StatsContainer"]
+z_index = 1
+layout_mode = 2
+texture = ExtResource("6_vqx31")
+
+[node name="CoinsCollected" type="Label" parent="Slime1/StatsContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 25
+text = "0"
+
+[node name="Bg" type="TextureRect" parent="Slime1"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -1.0
+offset_right = 266.0
+offset_bottom = 40.0
+texture = ExtResource("4_hfhsn")
+expand_mode = 1
+
+[node name="Slime" type="AnimatedSprite2D" parent="Slime1"]
+z_index = 1
+position = Vector2(36, -65)
+sprite_frames = SubResource("SpriteFrames_wi7yl")
+
+[node name="ScoreContainer" type="HBoxContainer" parent="Slime1"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = -28.0
+offset_right = 257.0
+offset_bottom = 3.0
+
+[node name="ScoreLabel" type="Label" parent="Slime1/ScoreContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 30
+text = "Score: "
+
+[node name="space" type="Control" parent="Slime1/ScoreContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Score" type="Label" parent="Slime1/ScoreContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="Slime2" type="ColorRect" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+color = Color(1, 1, 1, 0)
+
+[node name="StatsContainer" type="HBoxContainer" parent="Slime2"]
+z_index = 1
+layout_mode = 0
+offset_left = -205.0
+offset_top = 3.0
+offset_right = 46.0
+offset_bottom = 35.0
+
+[node name="Life" type="TextureRect" parent="Slime2/StatsContainer"]
+z_index = 1
+layout_mode = 2
+texture = ExtResource("4_wunin")
+expand_mode = 2
+
+[node name="LifePoint" type="Label" parent="Slime2/StatsContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 25
+text = "0"
+
+[node name="space" type="Control" parent="Slime2/StatsContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Kills" type="TextureRect" parent="Slime2/StatsContainer"]
+z_index = 1
+layout_mode = 2
+texture = ExtResource("5_j04uc")
+expand_mode = 2
+
+[node name="KillsNum" type="Label" parent="Slime2/StatsContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 25
+text = "0"
+
+[node name="space2" type="Control" parent="Slime2/StatsContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Coins" type="TextureRect" parent="Slime2/StatsContainer"]
+z_index = 1
+layout_mode = 2
+texture = ExtResource("6_vqx31")
+
+[node name="CoinsCollected" type="Label" parent="Slime2/StatsContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 25
+text = "0"
+
+[node name="Bg" type="TextureRect" parent="Slime2"]
+layout_mode = 0
+offset_left = -221.0
+offset_top = -2.0
+offset_right = 54.0
+offset_bottom = 39.0
+texture = ExtResource("4_hfhsn")
+expand_mode = 1
+
+[node name="Slime" type="AnimatedSprite2D" parent="Slime2"]
+z_index = 1
+position = Vector2(2, -65)
+sprite_frames = SubResource("SpriteFrames_68ajo")
+flip_h = true
+
+[node name="ScoreContainer" type="HBoxContainer" parent="Slime2"]
+layout_mode = 0
+offset_left = -221.0
+offset_top = -28.0
+offset_right = -35.0
+offset_bottom = 3.0
+
+[node name="ScoreLabel" type="Label" parent="Slime2/ScoreContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 30
+text = "Score:"
+
+[node name="space" type="Control" parent="Slime2/ScoreContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Score" type="Label" parent="Slime2/ScoreContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 30
+text = "0"

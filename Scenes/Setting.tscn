@@ -1,0 +1,182 @@
+[gd_scene load_steps=19 format=3 uid="uid://cxqujq20sumdk"]
+
+[ext_resource type="Script" uid="uid://dwt0ng25qd27v" path="res://Scripts/setting.gd" id="1_clo8n"]
+[ext_resource type="Texture2D" uid="uid://cmny28217uflm" path="res://Assets/GUI/settings/bg.png" id="2_efio3"]
+[ext_resource type="Texture2D" uid="uid://bxl5jo01itq14" path="res://Assets/GUI/settings/92.png" id="2_hthjr"]
+[ext_resource type="Shader" uid="uid://bkrhwvbwyaij1" path="res://Assets/Shaders/Setting.gdshader" id="2_lbbva"]
+[ext_resource type="Texture2D" uid="uid://c6eli3cjrsvf1" path="res://Assets/GUI/btn/close.png" id="4_iay5r"]
+[ext_resource type="PackedScene" uid="uid://dsgnfyvl16pyv" path="res://Scenes/Button.tscn" id="4_v6w4y"]
+[ext_resource type="Texture2D" uid="uid://cayi86bm5xy0j" path="res://Assets/GUI/btn/misic.png" id="5_73t6f"]
+[ext_resource type="Texture2D" uid="uid://c2h4mnjd2ujuy" path="res://Assets/GUI/settings/96.png" id="6_e1h0i"]
+[ext_resource type="Texture2D" uid="uid://2kpcso2qe2bg" path="res://Assets/GUI/btn/music_off.png" id="6_nmbau"]
+[ext_resource type="Texture2D" uid="uid://kdkpbq51epmd" path="res://Assets/GUI/btn/sound.png" id="7_e1h0i"]
+[ext_resource type="Texture2D" uid="uid://kxt2stiidp4p" path="res://Assets/GUI/btn/sound_off.png" id="8_hthjr"]
+[ext_resource type="Texture2D" uid="uid://dd2xjl6wmm468" path="res://Assets/GUI/settings/95.png" id="8_oj0c3"]
+[ext_resource type="AudioStream" uid="uid://cnacqddmh1ans" path="res://Assets/Sounds/others/mouse-click.mp3" id="12_oj0c3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_efio3"]
+size = Vector2(520, 401)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sa0tw"]
+shader = ExtResource("2_lbbva")
+shader_parameter/lod = 1.57
+
+[sub_resource type="Animation" id="Animation_sa0tw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.57]
+}
+
+[sub_resource type="Animation" id="Animation_lbbva"]
+resource_name = "blur"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.886, 0.886]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ihnk7"]
+_data = {
+&"RESET": SubResource("Animation_sa0tw"),
+&"blur": SubResource("Animation_lbbva")
+}
+
+[node name="Setting" type="Area2D"]
+z_index = 6
+script = ExtResource("1_clo8n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 6
+position = Vector2(2, -10.5)
+shape = SubResource("RectangleShape2D_efio3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 5
+material = SubResource("ShaderMaterial_sa0tw")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1152.0
+offset_top = -648.0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_index = 5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1152.0
+offset_top = -648.0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0.20871, 0.20871, 0.20871, 0.5)
+
+[node name="92" type="Sprite2D" parent="."]
+z_index = 7
+position = Vector2(-21, -199)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_hthjr")
+
+[node name="Bg" type="Sprite2D" parent="."]
+z_index = 6
+position = Vector2(2, -2)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_efio3")
+
+[node name="Close" parent="." instance=ExtResource("4_v6w4y")]
+z_index = 10
+position = Vector2(237, -154)
+texture = ExtResource("4_iay5r")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="MusicOn" type="Node2D" parent="."]
+
+[node name="Music" parent="MusicOn" instance=ExtResource("4_v6w4y")]
+z_index = 10
+position = Vector2(-113, -78)
+texture = ExtResource("7_e1h0i")
+
+[node name="BtnMusic" parent="MusicOn" instance=ExtResource("4_v6w4y")]
+z_index = 10
+position = Vector2(70, -78)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("6_e1h0i")
+
+[node name="MusicOff" type="Node2D" parent="."]
+
+[node name="MusicOff" parent="MusicOff" instance=ExtResource("4_v6w4y")]
+z_index = 10
+position = Vector2(-113, -78)
+texture = ExtResource("8_hthjr")
+
+[node name="BtnMusicOff" parent="MusicOff" instance=ExtResource("4_v6w4y")]
+z_index = 10
+position = Vector2(70, -78)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("8_oj0c3")
+
+[node name="SoundOn" type="Node2D" parent="."]
+
+[node name="Sound" parent="SoundOn" instance=ExtResource("4_v6w4y")]
+z_index = 10
+position = Vector2(-113, 67)
+texture = ExtResource("5_73t6f")
+
+[node name="BtnSound" parent="SoundOn" instance=ExtResource("4_v6w4y")]
+z_index = 10
+position = Vector2(70, 67)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("6_e1h0i")
+
+[node name="SoundOff" type="Node2D" parent="."]
+
+[node name="SoundOff" parent="SoundOff" instance=ExtResource("4_v6w4y")]
+z_index = 10
+position = Vector2(-113, 67)
+texture = ExtResource("6_nmbau")
+
+[node name="BtnSoundOff" parent="SoundOff" instance=ExtResource("4_v6w4y")]
+z_index = 10
+position = Vector2(70, 67)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("8_oj0c3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ihnk7")
+}
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_oj0c3")
+
+[connection signal="click" from="Close" to="." method="_on_close_click"]
+[connection signal="click" from="MusicOn/Music" to="." method="_on_btn_music_click"]
+[connection signal="click" from="MusicOn/BtnMusic" to="." method="_on_btn_music_click"]
+[connection signal="click" from="MusicOff/MusicOff" to="." method="_on_btn_music_off_click"]
+[connection signal="click" from="MusicOff/BtnMusicOff" to="." method="_on_btn_music_off_click"]
+[connection signal="click" from="SoundOn/Sound" to="." method="_on_btn_sound_click"]
+[connection signal="click" from="SoundOn/BtnSound" to="." method="_on_btn_sound_click"]
+[connection signal="click" from="SoundOff/SoundOff" to="." method="_on_btn_sound_off_click"]
+[connection signal="click" from="SoundOff/BtnSoundOff" to="." method="_on_btn_sound_off_click"]

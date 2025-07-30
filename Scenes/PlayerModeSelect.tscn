@@ -1,0 +1,161 @@
+[gd_scene load_steps=18 format=3 uid="uid://bxtp3h6nenaji"]
+
+[ext_resource type="Script" uid="uid://veruews4bwsv" path="res://Scripts/player_mode_select.gd" id="1_w3jyv"]
+[ext_resource type="Texture2D" uid="uid://dun6tlj76f8w" path="res://Assets/backgrounds/10.png" id="2_t1xxt"]
+[ext_resource type="Texture2D" uid="uid://cmny28217uflm" path="res://Assets/GUI/settings/bg.png" id="3_bbamr"]
+[ext_resource type="Texture2D" uid="uid://7gqnbpwsmc1g" path="res://Assets/GUI/settings/table.png" id="4_vyb6j"]
+[ext_resource type="PackedScene" uid="uid://dsgnfyvl16pyv" path="res://Scenes/Button.tscn" id="5_n8snv"]
+[ext_resource type="Texture2D" uid="uid://c5li42bmjl4v" path="res://Assets/GUI/btn/prew.png" id="6_w8j42"]
+[ext_resource type="Texture2D" uid="uid://oqnwbd72pn36" path="res://Assets/keycaps/letter-p.png" id="9_wrhyj"]
+[ext_resource type="Texture2D" uid="uid://b543k7ym0yfxn" path="res://Assets/keycaps/letter-l.png" id="10_nqbny"]
+[ext_resource type="Texture2D" uid="uid://dqdoejb85r7jw" path="res://Assets/keycaps/letter-a.png" id="11_38nto"]
+[ext_resource type="Texture2D" uid="uid://clcylagsc7ghk" path="res://Assets/keycaps/letter-y.png" id="12_jwvgg"]
+[ext_resource type="Texture2D" uid="uid://bcbrrudvpc8gd" path="res://Assets/keycaps/letter-e.png" id="13_j68ee"]
+[ext_resource type="FontFile" uid="uid://craeahiq1gby2" path="res://Assets/Fonts/soup_of_justice/soupofjustice.ttf" id="13_wc8ny"]
+[ext_resource type="Texture2D" uid="uid://bvqsrwk7judp8" path="res://Assets/keycaps/letter-r.png" id="14_eoqaj"]
+[ext_resource type="AudioStream" uid="uid://cnacqddmh1ans" path="res://Assets/Sounds/others/mouse-click.mp3" id="15_n8snv"]
+[ext_resource type="Texture2D" uid="uid://dddo8y7adq673" path="res://Assets/keycaps/letter-s.png" id="15_njd12"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8snv"]
+size = Vector2(382, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wc8ny"]
+size = Vector2(452.5, 68)
+
+[node name="PlayerModeSelect" type="Node2D"]
+script = ExtResource("1_w3jyv")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("2_t1xxt")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Bg" type="Sprite2D" parent="."]
+position = Vector2(3.40002, 0.600006)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_bbamr")
+
+[node name="Table" type="Sprite2D" parent="."]
+position = Vector2(0.400024, -15.4)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_vyb6j")
+
+[node name="Back" parent="." instance=ExtResource("5_n8snv")]
+z_index = 4
+position = Vector2(-333, -232)
+texture = ExtResource("6_w8j42")
+
+[node name="1Player" type="Area2D" parent="."]
+
+[node name="Letter-p" type="Sprite2D" parent="1Player"]
+position = Vector2(-108, -98)
+texture = ExtResource("9_wrhyj")
+
+[node name="Letter-l" type="Sprite2D" parent="1Player"]
+position = Vector2(-53, -98)
+texture = ExtResource("10_nqbny")
+
+[node name="Letter-a" type="Sprite2D" parent="1Player"]
+position = Vector2(2, -98)
+texture = ExtResource("11_38nto")
+
+[node name="Letter-y" type="Sprite2D" parent="1Player"]
+position = Vector2(57, -98)
+texture = ExtResource("12_jwvgg")
+
+[node name="Letter-e" type="Sprite2D" parent="1Player"]
+position = Vector2(112, -98)
+texture = ExtResource("13_j68ee")
+
+[node name="Letter-r" type="Sprite2D" parent="1Player"]
+position = Vector2(167, -98)
+texture = ExtResource("14_eoqaj")
+
+[node name="Label2" type="Label" parent="1Player"]
+z_index = 1
+offset_left = -179.0
+offset_top = -128.0
+offset_right = -123.0
+offset_bottom = -57.0
+theme_override_colors/font_color = Color(0.351231, 0.560608, 0.666827, 1)
+theme_override_fonts/font = ExtResource("13_wc8ny")
+theme_override_font_sizes/font_size = 60
+text = "1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="1Player"]
+position = Vector2(6, -99)
+shape = SubResource("RectangleShape2D_n8snv")
+
+[node name="2Player" type="Area2D" parent="."]
+position = Vector2(0, -2)
+
+[node name="Letter-s" type="Sprite2D" parent="2Player"]
+position = Vector2(195, 59)
+texture = ExtResource("15_njd12")
+
+[node name="Letter-p2" type="Sprite2D" parent="2Player"]
+position = Vector2(-135, 59)
+texture = ExtResource("9_wrhyj")
+
+[node name="Letter-l2" type="Sprite2D" parent="2Player"]
+position = Vector2(-80, 59)
+texture = ExtResource("10_nqbny")
+
+[node name="Letter-a2" type="Sprite2D" parent="2Player"]
+position = Vector2(-25, 59)
+texture = ExtResource("11_38nto")
+
+[node name="Letter-y2" type="Sprite2D" parent="2Player"]
+position = Vector2(30, 59)
+texture = ExtResource("12_jwvgg")
+
+[node name="Letter-e2" type="Sprite2D" parent="2Player"]
+position = Vector2(85, 59)
+texture = ExtResource("13_j68ee")
+
+[node name="Letter-r2" type="Sprite2D" parent="2Player"]
+position = Vector2(140, 59)
+texture = ExtResource("14_eoqaj")
+
+[node name="Label3" type="Label" parent="2Player"]
+z_index = 1
+offset_left = -217.0
+offset_top = 32.0
+offset_right = -150.0
+offset_bottom = 155.0
+theme_override_colors/font_color = Color(0.351231, 0.560608, 0.666827, 1)
+theme_override_fonts/font = ExtResource("13_wc8ny")
+theme_override_font_sizes/font_size = 60
+text = "2
+"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2Player"]
+position = Vector2(2.75, 58)
+shape = SubResource("RectangleShape2D_wc8ny")
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+offset_left = -183.0
+offset_top = -275.0
+offset_right = 211.0
+offset_bottom = -204.0
+theme_override_colors/font_color = Color(0.803922, 0.988235, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_wc8ny")
+theme_override_font_sizes/font_size = 70
+text = "Mode select"
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_n8snv")
+
+[connection signal="click" from="Back" to="." method="_on_back_click"]
+[connection signal="input_event" from="1Player" to="." method="_on_player_input_event"]
+[connection signal="mouse_entered" from="1Player" to="." method="_on_player_mouse_entered"]
+[connection signal="mouse_exited" from="1Player" to="." method="_on_player_mouse_exited"]
+[connection signal="input_event" from="2Player" to="." method="_on_2players_input_event"]
+[connection signal="mouse_entered" from="2Player" to="." method="_on_2players_mouse_entered"]
+[connection signal="mouse_exited" from="2Player" to="." method="_on_2players_mouse_exited"]

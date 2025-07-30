@@ -1,0 +1,260 @@
+extends Node2D
+
+@export var effect_scene : PackedScene = load("res://Scenes/Effects.tscn")
+
+@export var coin_scene : PackedScene = load("res://Scenes/Coin.tscn")
+@export var shield_scene : PackedScene = load("res://Scenes/Shield.tscn")
+@export var hp_scene : PackedScene = load("res://Scenes/HP.tscn")
+@export var spike_scene : PackedScene = load("res://Scenes/Spike.tscn")
+@export var monster_scene: PackedScene = load("res://Scenes/Monster.tscn")
+@export var chest_scene: PackedScene = load("res://Scenes/Chest.tscn")
+
+@export_range(0, 1) var time_decrease_factor: float = 0.7
+
+
+@export var game_over_scene: PackedScene = preload("res://Scenes/GameOver.tscn")
+
+@onready var gui = $UI
+
+
+@export var monster_wait_time: float = 6.0
+@export var chest_wait_time: float = 15.0
+
+
+var wait_time_ratio: float = 1.0
+
+@onready var chest_spawn_location: PathFollow2D = $ChestSpawn/PathFollow2D
+@onready var monster_spawn_location: PathFollow2D = $MonsterSpawn/PathFollow2D
+
+var start_time : float
+var time_elapsed := 0.0
+
+var score = 0
+var score2 = 0
+
+var new_best = false
+var best_score = 0
+
+var coins = 0
+var coins2= 0
+
+var kills = 0
+var kills2 = 0
+
+
+var slime = null
+var slime2 = null
+
+var game_over = false
+
+const TIME_TO_CHANGE_DIFF = 60
+var difficulty = 0
+
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	AudioManager.play_random_ingame()
+	var background = $Background
+	var d = randi() % 10 + 1
+	d = 10
+	background.texture = load("res://Assets/backgrounds/%d.png" % d)
+	
+	
+	start_time = Time.get_unix_time_from_system()
+	
+
+	
+	
+	if Global.player_mode == 2:
+		$SlimeBlue.remove_child($SlimeBlue/RemoteTransform2D)
+		$SlimeRed.remove_child($SlimeRed/RemoteTransform2D)
+		slime = $SlimeBlue
+		slime2 = $SlimeRed
+		gui.update_lives_2(slime2.hp)
+		slime2.update_hp.connect(update_hp_2)
+		slime2.coin_collected.connect(collect_coin_2)
+		monster_wait_time /=2
+		chest_wait_time /= 2
+	else:
+		if Global.selected_character == 1:
+			slime = $SlimeBlue
+			remove_child($SlimeRed)
+		else:
+			slime = $SlimeRed
+			remove_child($SlimeBlue)
+		
+	gui.update_lives_1(slime.hp)
+	
+	slime.update_hp.connect(update_hp_1)
+	slime.coin_collected.connect(collect_coin_1)
+	
+	
+	
+	$MonsterSpawnTimer.wait_time = monster_wait_time
+	$ChestSpawnTimer.wait_time = chest_wait_time
+
+
+
+
+func monster_die(player_id:int):
+	if player_id == 1 or Global.player_mode == 1:
+		kills += 1
+		score += 5
+		gui.update_score_1(score)
+		gui.update_kills_1(kills)
+	else:
+		kills2 += 1
+		score2 += 5
+		gui.update_score_2(score2)
+		gui.update_kills_2(kills2)
+
+func update_hp_1():
+	gui.update_lives_1(slime.hp)
+	if (slime.hp <= 0 and Global.player_mode == 1) or (slime.hp <= 0 and slime2.hp <= 0):
+		if Global.player_mode == 2:
+			if slime2.hp <= 0:
+				game_over_func(2)
+		else:
+			if score > Global.best_score:
+				Global.save_score_setting(score, time_elapsed, kills, coins)
+				new_best = true
+			if new_best:
+				$Winner2P.play()
+			else:
+				$Lose.play()	
+			game_over_func(2)
+	#		Game over
+
+		game_over = true
+		$PauseMenu.visible = false
+		$UI.visible =false
+		$PauseMenu.game_over = true
+		pass
+		
+func update_hp_2():
+	gui.update_lives_2(slime2.hp)
+	if slime.hp <= 0 and slime2.hp <= 0:
+		game_over_func(1)
+		$PauseMenu.visible = false
+		$UI.visible =false
+		game_over = true
+		$PauseMenu.game_over = true
+
+func game_over_func(die_first :int):
+	var game_over_screen = game_over_scene.instantiate()
+	game_over_screen.winner = 1
+	game_over_screen.score = score
+	game_over_screen.kills = kills
+	game_over_screen.coins = coins
+	game_over_screen.time = time_elapsed
+	
+	if score2 > score or (score2 == score and kills2 > kills) or (score2 == score and kills2 == kills and coins2 > coins) or (score2 == score and kills2 == kills and coins2 == coins and die_first == 1):
+		game_over_screen.winner = 2
+		game_over_screen.score = score2
+		game_over_screen.kills = kills2
+		game_over_screen.coins = coins2
+	if Global.player_mode == 2:
+		game_over_screen.mode = 2
+		$Winner2P.play()
+	else:
+		game_over_screen.winner = Global.selected_character
+		game_over_screen.new_best = new_best
+	call_deferred("add_child", game_over_screen)
+
+func collect_coin_1():
+	coins += 1
+	score += 10
+	gui.update_score_1(score)
+	gui.update_coins_1(coins)
+	
+func collect_coin_2():
+	coins2 += 1
+	score2 += 10
+	gui.update_score_2(score2)
+	gui.update_coins_2(coins2)
+
+func _on_game_timer_timeout() -> void:
+	if game_over:
+		return
+	var time_now = Time.get_unix_time_from_system()
+	time_elapsed = time_now - start_time
+	gui.set_time(time_elapsed)
+
+func _on_chest_break(chest_pos):
+	var roll = randi() % 100
+	var created_scene = null
+	var transform_pos = Vector2.ZERO
+	if roll < 45:
+		created_scene = coin_scene.instantiate()
+	elif roll < 55:
+		created_scene = hp_scene.instantiate()
+	elif roll < 65:
+		created_scene = shield_scene.instantiate()
+		transform_pos = Vector2(0, -10)
+	elif roll < 85:
+		created_scene = spike_scene.instantiate()
+		transform_pos = Vector2(0, 10)
+	elif roll < 95:
+		created_scene = monster_scene.instantiate()
+		created_scene.die.connect(monster_die)
+	else:
+		return # 5% chance to do nothing
+	
+	created_scene.position = chest_pos + transform_pos
+	add_child(created_scene)
+
+
+func _process(_delta: float) -> void:
+	if (floor(time_elapsed/TIME_TO_CHANGE_DIFF) > difficulty):
+		$MonsterSpawnTimer.wait_time *= time_decrease_factor
+		$ChestSpawnTimer.wait_time *= time_decrease_factor
+		difficulty += 1
+		AudioManager.play_random_ingame()
+	
+	if slime and slime2:
+		$Camera2D.position = (slime.position + slime2.position)/2
+		var left = slime
+		var right = slime2
+		if slime.position.x > slime2.position.x:
+			left = slime2
+			right = slime
+			
+		var distance = slime.position.distance_to(slime2.position) + 80
+		var screen_width = get_viewport_rect().size.x
+		
+		if distance <= screen_width:
+			$ViewPortBoundary/LeftShape.position.x = left.position.x -32
+			$ViewPortBoundary/RightShape.position.x = right.position.x + 32
+
+
+func _on_chest_spawn_timer_timeout() -> void:
+	if not game_over:
+		spawn_chest()
+
+
+func _on_monster_spawn_timer_timeout() -> void:
+	if not game_over:
+		spawn_monster()
+		
+		
+func spawn_chest():
+	chest_spawn_location.progress_ratio = randf()
+	
+	var chest: Chest = chest_scene.instantiate()
+	chest.chest_break.connect(_on_chest_break)
+	chest.position = chest_spawn_location.position
+	#chest.position = Vector2(-50, -320)
+	add_child(chest)
+
+
+func spawn_monster():
+	monster_spawn_location.progress_ratio = randf()
+	
+	var monster: Monster = monster_scene.instantiate()
+	monster.die.connect(monster_die)
+	monster.position = monster_spawn_location.position
+	#monster.position = Vector2(50, -320)
+	add_child(monster)
+	# Confirm this monster's AnimationPlayer is unique
+	assert(monster.get_node("AnimationPlayer") != null)

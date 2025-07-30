@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=3 uid="uid://djsew4jp6cfkq"]
+
+[ext_resource type="Script" uid="uid://dmmdb76ten4w8" path="res://Scripts/game.gd" id="1_j5yw3"]
+[ext_resource type="Texture2D" uid="uid://dun6tlj76f8w" path="res://Assets/backgrounds/10.png" id="2_dahhg"]
+[ext_resource type="Texture2D" uid="uid://eae1oj1yn3d4" path="res://icon.svg" id="2_j5yw3"]
+[ext_resource type="AudioStream" uid="uid://cnacqddmh1ans" path="res://Assets/Sounds/others/mouse-click.mp3" id="6_7lihs"]
+[ext_resource type="PackedScene" uid="uid://honmioa12jm3" path="res://Scenes/UI.tscn" id="7_fgofq"]
+[ext_resource type="PackedScene" uid="uid://dmq8j3n7np71b" path="res://Scenes/PauseMenu.tscn" id="12_3so38"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kldst"]
+size = Vector2(388, 132.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5yw3"]
+size = Vector2(73, 65)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_j5yw3")
+
+[node name="PauseMenu" parent="." instance=ExtResource("12_3so38")]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+process_mode = 3
+follow_viewport_enabled = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+process_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+process_mode = 3
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer/TextureRect"]
+process_mode = 3
+z_index = -1
+texture = ExtResource("2_dahhg")
+
+[node name="UI" parent="." instance=ExtResource("7_fgofq")]
+
+[node name="Effect" type="Node2D" parent="."]
+
+[node name="static1" type="StaticBody2D" parent="."]
+z_index = 10
+collision_layer = 5
+collision_mask = 5
+
+[node name="Icon" type="Sprite2D" parent="static1"]
+position = Vector2(5, 386)
+texture = ExtResource("2_j5yw3")
+
+[node name="Icon2" type="Sprite2D" parent="static1"]
+position = Vector2(134, 387)
+texture = ExtResource("2_j5yw3")
+
+[node name="Icon3" type="Sprite2D" parent="static1"]
+position = Vector2(266, 388)
+texture = ExtResource("2_j5yw3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="static1"]
+position = Vector2(136, 384.75)
+shape = SubResource("RectangleShape2D_kldst")
+
+[node name="Static2" type="StaticBody2D" parent="."]
+collision_layer = 5
+collision_mask = 5
+
+[node name="Icon" type="Sprite2D" parent="Static2"]
+position = Vector2(300.5, 284.5)
+scale = Vector2(0.570313, 0.492188)
+texture = ExtResource("2_j5yw3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Static2"]
+position = Vector2(299.5, 284.5)
+shape = SubResource("RectangleShape2D_j5yw3")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-187, 253)
+collision_layer = 5
+collision_mask = 5
+
+[node name="Icon2" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-61, 90.5)
+texture = ExtResource("2_j5yw3")
+
+[node name="Icon3" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(71, 91.5)
+texture = ExtResource("2_j5yw3")
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-188, 86.75)
+texture = ExtResource("2_j5yw3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-59, 88.25)
+shape = SubResource("RectangleShape2D_kldst")
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_7lihs")
+
+[node name="Camera2D" type="Camera2D" parent="."]

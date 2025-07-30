@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://qu2bfjhp8a4j"]
+
+[ext_resource type="Script" uid="uid://cd62unedtcura" path="res://Scripts/shield.gd" id="1_g6qfg"]
+[ext_resource type="Texture2D" uid="uid://dd83ppwwixkgj" path="res://Assets/Art/spr_shield.png" id="1_xuq1u"]
+[ext_resource type="Shader" uid="uid://drexo2nxvowrm" path="res://Assets/Shaders/Shield.gdshader" id="3_1vnn7"]
+[ext_resource type="Texture2D" uid="uid://bn4wc2d5ctt7o" path="res://Assets/Art/wooden_shield.png" id="3_f84if"]
+[ext_resource type="AudioStream" uid="uid://dhqttbrte8ds6" path="res://Assets/Sounds/others/shielding-game-sound-effect-379733.mp3" id="5_fv2wv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xuq1u"]
+radius = 38.833
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hfke4"]
+shader = ExtResource("3_1vnn7")
+shader_parameter/rotation = 0.0
+
+[node name="Shield" type="Area2D"]
+collision_mask = 3
+script = ExtResource("1_g6qfg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_xuq1u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xuq1u")
+
+[node name="WoodenShield" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_hfke4")
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("3_f84if")
+
+[node name="GetShield" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_fv2wv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
