@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dln8inht2glu5"]
+[gd_scene load_steps=38 format=3 uid="uid://dln8inht2glu5"]
 
 [ext_resource type="Script" uid="uid://dpx4e6be50f1y" path="res://Scripts/game_over.gd" id="1_aa261"]
 [ext_resource type="Texture2D" uid="uid://cmny28217uflm" path="res://Assets/GUI/settings/bg.png" id="2_bdvmp"]
@@ -15,8 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://u7hwy1ku5ox5" path="res://Assets/Art/coin.png" id="12_8bmsr"]
 [ext_resource type="Shader" uid="uid://bkrhwvbwyaij1" path="res://Assets/Shaders/Setting.gdshader" id="13_iu1kd"]
 [ext_resource type="Texture2D" uid="uid://cuxw0klmf7gf3" path="res://Assets/Art/firework (1).png" id="15_i4swy"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k00bn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l4nhs"]
 atlas = ExtResource("3_5ywbh")
@@ -187,11 +185,16 @@ _data = {
 &"blur": SubResource("Animation_lbbva")
 }
 
-[node name="GameOver" type="Area2D"]
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_aa261")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_k00bn")
 
 [node name="bg" type="Sprite2D" parent="."]
 z_index = 200
@@ -347,15 +350,16 @@ text = "0"
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 z_index = 199
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -2349.0
-offset_top = -1311.0
-offset_right = -45.0
-offset_bottom = -15.0
+offset_left = -2081.0
+offset_top = -1266.0
+offset_right = 223.0
+offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
@@ -365,6 +369,7 @@ color = Color(0.277528, 0.277528, 0.277528, 0.5)
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 198
 material = SubResource("ShaderMaterial_5ywbh")
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -1,4 +1,4 @@
-extends Area2D
+extends Control
 
 var score = 0
 var kills = 0

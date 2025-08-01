@@ -51,6 +51,8 @@ var kills = 0
 var kills2 = 0
 
 
+
+
 var slime = null
 var slime2 = null
 
@@ -58,6 +60,10 @@ var game_over = false
 
 const TIME_TO_CHANGE_DIFF = 60
 var difficulty = 0
+
+
+var is_dead = false
+var is_dead2 = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -83,8 +89,8 @@ func _ready() -> void:
 	
 	
 	if Global.player_mode == 2:
-		$SlimeBlue.remove_child($SlimeBlue/RemoteTransform2D)
-		$SlimeRed.remove_child($SlimeRed/RemoteTransform2D)
+		#$SlimeBlue.remove_child($SlimeBlue/RemoteTransform2D)
+		#$SlimeRed.remove_child($SlimeRed/RemoteTransform2D)
 		slime = $SlimeBlue
 		slime2 = $SlimeRed
 		gui.update_lives_2(slime2.hp)
@@ -93,6 +99,7 @@ func _ready() -> void:
 		monster_wait_time /=2
 		chest_wait_time /= 2
 	else:
+		is_dead2 = true
 		if Global.selected_character == 1:
 			slime = $SlimeBlue
 			remove_child($SlimeRed)
@@ -132,6 +139,8 @@ func monster_die(player_id:int):
 
 func update_hp_1():
 	gui.update_lives_1(slime.hp)
+	if slime.hp <= 0 : 
+		is_dead = true
 	if (slime.hp <= 0 and Global.player_mode == 1) or (slime.hp <= 0 and slime2.hp <= 0):
 		if Global.player_mode == 2:
 			if slime2.hp <= 0:
@@ -155,6 +164,8 @@ func update_hp_1():
 		
 func update_hp_2():
 	gui.update_lives_2(slime2.hp)
+	if slime2.hp <= 0 : 
+		is_dead2 = true
 	if slime.hp <= 0 and slime2.hp <= 0:
 		game_over_func(1)
 		$PauseMenu.visible = false
@@ -181,6 +192,8 @@ func game_over_func(die_first :int):
 	else:
 		game_over_screen.winner = Global.selected_character
 		game_over_screen.new_best = new_best
+		
+	$Camera2D.position = Vector2.ZERO
 	call_deferred("add_child", game_over_screen)
 
 func collect_coin_1():
@@ -227,14 +240,26 @@ func _on_chest_break(chest_pos):
 	add_child(created_scene)
 
 func _process(delta: float) -> void:
+	if is_dead and is_dead2:
+		return
 	if (floor(time_elapsed/TIME_TO_CHANGE_DIFF) > difficulty):
 		$MonsterSpawnTimer.wait_time *= time_decrease_factor
 		$ChestSpawnTimer.wait_time *= time_decrease_factor
 		difficulty += 1
 		AudioManager.play_random_ingame()
 	
+	if Global.player_mode == 1:
+		$Camera2D.position = slime.position
+	
+	
+	
 	if slime and slime2:
-		$Camera2D.position = (slime.position + slime2.position)/2
+		if is_dead and !is_dead2:
+			$Camera2D.position = slime2.position
+		elif !is_dead and is_dead2:
+			$Camera2D.position = slime.position
+		else:
+			$Camera2D.position = (slime.position + slime2.position)/2
 		var left = slime
 		var right = slime2
 		if slime.position.x > slime2.position.x:
@@ -243,8 +268,10 @@ func _process(delta: float) -> void:
 			
 		var distance = slime.position.distance_to(slime2.position) + 80
 		var screen_width = get_viewport_rect().size.x
-		
-		if distance <= screen_width:
+		if is_dead or is_dead2:
+			$ViewPortBoundary/LeftShape.position.x = -1000000000
+			$ViewPortBoundary/RightShape.position.x = 1000000000
+		elif distance <= screen_width:
 			$ViewPortBoundary/LeftShape.position.x = left.position.x -32
 			$ViewPortBoundary/RightShape.position.x = right.position.x + 32
 	
