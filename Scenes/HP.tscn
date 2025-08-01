@@ -27,5 +27,6 @@ shape = SubResource("CircleShape2D_sdp0f")
 
 [node name="GetHP" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_kug5e")
+bus = &"Sound"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

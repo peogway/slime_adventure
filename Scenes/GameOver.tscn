@@ -269,6 +269,7 @@ texture = ExtResource("15_i4swy")
 
 [node name="Label2" type="Label" parent="."]
 z_index = 200
+layout_mode = 0
 offset_left = -247.0
 offset_top = -183.0
 offset_right = 244.0
@@ -282,6 +283,7 @@ horizontal_alignment = 1
 
 [node name="StatsContainer" type="HBoxContainer" parent="."]
 z_index = 200
+layout_mode = 0
 offset_left = -256.0
 offset_top = 3.0
 offset_right = 249.0

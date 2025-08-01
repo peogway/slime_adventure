@@ -15,8 +15,8 @@ var move_audio = null
 var element_type = "fire" # or "water"
 
 # Movement
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+var SPEED = 300.0
+var JUMP_VELOCITY = -400.0
 const WALK_SPEED_THRESHOLD = 100.0
 
 var direction := 0.0
@@ -40,6 +40,10 @@ var player_damage = 8
 var hit_objects = {}
 var targets: Array = []
 var exp_ammount = 0
+
+var is_speed_boosted = false
+const SPEED_TIME = 10
+var speed_boost_time = SPEED_TIME
 
 # Health
 var hp = 3
@@ -67,6 +71,15 @@ func _ready():
 func _process(delta):
 	if hp <= 0: 
 		is_dead = true
+	
+	if is_speed_boosted:
+		speed_boost_time -= delta
+		if speed_boost_time <= 0:
+			is_speed_boosted = false
+			SPEED = 300
+			JUMP_VELOCITY = -400
+			
+	
 	if is_on_floor():
 		if on_air:
 			$TouchGround.play()
@@ -206,6 +219,12 @@ func handle_input_2_players() -> void:
 	if Input.is_action_just_pressed("move_down_p%d" % player_id) and is_on_floor():
 		position.y += 8
 
+
+func get_speed():
+	is_speed_boosted = true
+	speed_boost_time = SPEED_TIME
+	SPEED = 400
+	JUMP_VELOCITY = -450
 
 func _on_animation_finished():
 	if $AnimatedSprite2D.animation == ("%d_Hurt" % player_id):

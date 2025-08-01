@@ -16,7 +16,7 @@ func toggle_music() :
 	
 func toggle_sound() :
 	sound = !sound
-	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), !sound)
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Sound"), !sound)
 	save_sound_setting()
 	
 

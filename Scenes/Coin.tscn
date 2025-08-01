@@ -71,5 +71,6 @@ shape = SubResource("CircleShape2D_xlo06")
 [node name="GetCoin" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_wjfxq")
 volume_db = -5.904
+bus = &"Sound"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

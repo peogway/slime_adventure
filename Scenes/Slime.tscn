@@ -1000,63 +1000,79 @@ shape = SubResource("RectangleShape2D_vmhrb")
 [node name="Move1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_c37lc")
 volume_db = -10.0
+bus = &"Sound"
 
 [node name="Move2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_ebmqo")
 volume_db = -10.0
+bus = &"Sound"
 
 [node name="Jump1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_0xjjl")
 volume_db = -5.0
+bus = &"Sound"
 
 [node name="Jump2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_j33nm")
 volume_db = -5.0
+bus = &"Sound"
 
 [node name="Hurt1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_ua2ew")
+bus = &"Sound"
 
 [node name="Hurt2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_1hwsk")
+bus = &"Sound"
 
 [node name="Die1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("18_6hvtf")
 volume_db = -12.0
+bus = &"Sound"
 
 [node name="Die2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_18rlb")
 volume_db = -10.0
+bus = &"Sound"
 
 [node name="Attack1_1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("20_wmp5c")
 volume_db = -10.0
+bus = &"Sound"
 
 [node name="Attack1_2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("21_3wv46")
 volume_db = 2.0
+bus = &"Sound"
 
 [node name="Attack1_3" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("22_jkbp0")
 volume_db = 1.0
+bus = &"Sound"
 
 [node name="Attack2_1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("23_37gvs")
 volume_db = -10.0
+bus = &"Sound"
 
 [node name="Attack2_2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("24_qswrx")
 volume_db = -5.0
+bus = &"Sound"
 
 [node name="Attack2_3" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("25_w0clf")
+bus = &"Sound"
 
 [node name="LostShield" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("26_2iyvh")
 volume_db = -10.0
+bus = &"Sound"
 
 [node name="TouchGround" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("36_k70q5")
 volume_db = -10.0
+bus = &"Sound"
 
 [node name="AttackDelayTimer" type="Timer" parent="."]
 wait_time = 0.2

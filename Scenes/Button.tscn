@@ -18,6 +18,7 @@ shape = SubResource("RectangleShape2D_a506e")
 
 [node name="Click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_a506e")
+bus = &"Sound"
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

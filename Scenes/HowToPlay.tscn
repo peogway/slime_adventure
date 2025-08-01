@@ -733,6 +733,7 @@ libraries = {
 
 [node name="Click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("23_hg86a")
+bus = &"Sound"
 
 [connection signal="mouse_entered" from="TextureButton" to="." method="_on_texture_button_mouse_entered"]
 [connection signal="mouse_exited" from="TextureButton" to="." method="_on_texture_button_mouse_exited"]

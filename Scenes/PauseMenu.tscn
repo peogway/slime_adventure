@@ -244,6 +244,7 @@ libraries = {
 
 [node name="Click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_5w4ur")
+bus = &"Sound"
 
 [connection signal="mouse_entered" from="PauseButton" to="." method="_on_pause_button_mouse_entered"]
 [connection signal="mouse_exited" from="PauseButton" to="." method="_on_pause_button_mouse_exited"]

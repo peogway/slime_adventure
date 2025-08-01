@@ -151,6 +151,7 @@ text = "Mode select"
 
 [node name="Click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_n8snv")
+bus = &"Sound"
 
 [connection signal="click" from="Back" to="." method="_on_back_click"]
 [connection signal="input_event" from="1Player" to="." method="_on_player_input_event"]

@@ -104,15 +104,19 @@ shape = SubResource("RectangleShape2D_fqgxf")
 
 [node name="ChestBreak" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_out8u")
+bus = &"Sound"
 
 [node name="ChestHit1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_l4t8t")
+bus = &"Sound"
 
 [node name="ChestHit2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_p4icn")
+bus = &"Sound"
 
 [node name="ChestDrop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_gpr52")
+bus = &"Sound"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -57)
