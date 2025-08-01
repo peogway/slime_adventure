@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://ytka5k5cnqlj"]
+
+[ext_resource type="Script" uid="uid://cxp04aww2dfmi" path="res://Scripts/speed_up.gd" id="1_2nesi"]
+[ext_resource type="Shader" uid="uid://drexo2nxvowrm" path="res://Assets/Shaders/Shield.gdshader" id="1_s8pff"]
+[ext_resource type="Texture2D" uid="uid://dia8t5u0qwq5y" path="res://Assets/Art/athletics.png" id="1_wxgud"]
+[ext_resource type="AudioStream" uid="uid://b2joyq4243b8s" path="res://Assets/Sounds/others/get_boost.mp3" id="4_tjev1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s8pff"]
+radius = 22.0227
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tjev1"]
+shader = ExtResource("1_s8pff")
+shader_parameter/rotation = 0.0
+
+[node name="SpeedUp" type="Area2D"]
+collision_mask = 3
+script = ExtResource("1_2nesi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_s8pff")
+
+[node name="Run" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_tjev1")
+texture = ExtResource("1_wxgud")
+
+[node name="GetFast" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_tjev1")
+bus = &"Sound"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://r2yyjygfy36f"]
+[gd_scene load_steps=20 format=4 uid="uid://r2yyjygfy36f"]
 
 [ext_resource type="Script" uid="uid://dmmdb76ten4w8" path="res://Scripts/game.gd" id="1_j5yw3"]
 [ext_resource type="Texture2D" uid="uid://dun6tlj76f8w" path="res://Assets/backgrounds/10.png" id="2_dahhg"]
@@ -8,12 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://honmioa12jm3" path="res://Scenes/UI.tscn" id="7_fgofq"]
 [ext_resource type="Texture2D" uid="uid://bkmn4l13ebuxl" path="res://Assets/Tileset.png" id="8_3cx6b"]
 [ext_resource type="PackedScene" uid="uid://b82dttmbydpj" path="res://Scenes/MovingPlatform.tscn" id="8_dahhg"]
-[ext_resource type="PackedScene" uid="uid://ytka5k5cnqlj" path="res://Scenes/SpeedUp.tscn" id="9_wxwew"]
 [ext_resource type="AudioStream" uid="uid://bc8guosq1oc6m" path="res://Assets/musics/winner_2p.mp3" id="12_3cx6b"]
 [ext_resource type="PackedScene" uid="uid://dmq8j3n7np71b" path="res://Scenes/PauseMenu.tscn" id="12_3so38"]
-[ext_resource type="PackedScene" uid="uid://ddbmkppjqvha" path="res://Scenes/Chest.tscn" id="12_wxwew"]
 [ext_resource type="AudioStream" uid="uid://drq3scg8isstd" path="res://Assets/musics/lose.mp3" id="13_3cx6b"]
-[ext_resource type="PackedScene" uid="uid://dsfdy3gwhsvh1" path="res://Scenes/Monster.tscn" id="13_wxwew"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wxwew"]
 texture = ExtResource("6_dahhg")
@@ -359,9 +356,6 @@ position = Vector2(-878, -305)
 position = Vector2(560, -18)
 animation_track = 2
 
-[node name="SpeedUp" parent="MovingPlatforms" instance=ExtResource("9_wxwew")]
-position = Vector2(209, -69)
-
 [node name="Click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_7lihs")
 bus = &"Sound"
@@ -409,23 +403,6 @@ shape = SubResource("RectangleShape2D_71axn")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries"]
 position = Vector2(1142, -3)
 shape = SubResource("RectangleShape2D_71axn")
-
-[node name="Chest" parent="." instance=ExtResource("12_wxwew")]
-position = Vector2(-910, -464)
-
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="Monster" parent="Node2D" instance=ExtResource("13_wxwew")]
-position = Vector2(-358, 262)
-
-[node name="Monster2" parent="Node2D" instance=ExtResource("13_wxwew")]
-position = Vector2(83, 463)
-
-[node name="Monster3" parent="Node2D" instance=ExtResource("13_wxwew")]
-position = Vector2(-193, 57)
-
-[node name="Monster4" parent="Node2D" instance=ExtResource("13_wxwew")]
-position = Vector2(165, 322)
 
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
 [connection signal="timeout" from="MonsterSpawnTimer" to="." method="_on_monster_spawn_timer_timeout"]

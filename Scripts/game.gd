@@ -10,6 +10,8 @@ signal get_berserk(slime_pos)
 @export var spike_scene : PackedScene = load("res://Scenes/Spike.tscn")
 @export var monster_scene: PackedScene = load("res://Scenes/Monster.tscn")
 @export var chest_scene: PackedScene = load("res://Scenes/Chest.tscn")
+@export var boost_scene: PackedScene = load("res://Scenes/SpeedUp.tscn")
+
 
 @export_range(0, 1) var time_decrease_factor: float = 0.7
 
@@ -225,20 +227,18 @@ func _on_chest_break(chest_pos):
 	var roll = randi() % 100
 	var created_scene = null
 	var transform_pos = Vector2.ZERO
-	if roll < 45:
+	if roll < 25:
 		created_scene = coin_scene.instantiate()
-	elif roll < 55:
+	elif roll < 40:
 		created_scene = hp_scene.instantiate()
-	elif roll < 65:
+	elif roll < 60:
 		created_scene = shield_scene.instantiate()
 		transform_pos = Vector2(0, -10)
-	elif roll < 85:
+	elif roll < 70:
 		created_scene = spike_scene.instantiate()
 		transform_pos = Vector2(0, 10)
 	elif roll < 95:
-		created_scene = monster_scene.instantiate()
-		get_berserk.connect(created_scene.set_slime_pos)
-		created_scene.die.connect(monster_die)
+		created_scene = boost_scene.instantiate()
 	else:
 		return # 5% chance to do nothing
 	

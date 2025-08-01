@@ -223,8 +223,8 @@ func handle_input_2_players() -> void:
 func get_speed():
 	is_speed_boosted = true
 	speed_boost_time = SPEED_TIME
-	SPEED = 400
-	JUMP_VELOCITY = -450
+	SPEED = 500
+	JUMP_VELOCITY = -500
 
 func _on_animation_finished():
 	if $AnimatedSprite2D.animation == ("%d_Hurt" % player_id):
