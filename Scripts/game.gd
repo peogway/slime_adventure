@@ -1,5 +1,7 @@
 extends Node2D
 
+signal get_berserk(slime_pos)
+
 @export var effect_scene : PackedScene = load("res://Scenes/Effects.tscn")
 
 @export var coin_scene : PackedScene = load("res://Scenes/Coin.tscn")
@@ -20,11 +22,18 @@ extends Node2D
 @export var monster_wait_time: float = 6.0
 @export var chest_wait_time: float = 15.0
 
-
 var wait_time_ratio: float = 1.0
 
 @onready var chest_spawn_location: PathFollow2D = $ChestSpawn/PathFollow2D
 @onready var monster_spawn_location: PathFollow2D = $MonsterSpawn/PathFollow2D
+
+const BERSERK_TIME_CONSTANT = 30
+const TIME_TO_EMIT_POS = 0.5
+var delay_time_to_emit_pos = TIME_TO_EMIT_POS
+var berserk_time = BERSERK_TIME_CONSTANT
+var is_monster_berserk = false
+var slime_to_chase = 1
+var recent_die = false
 
 var start_time : float
 var time_elapsed := 0.0
@@ -51,9 +60,16 @@ const TIME_TO_CHANGE_DIFF = 60
 var difficulty = 0
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#$Monster.die.connect(monster_die)
+	#get_berserk.connect($Monster.set_slime_pos)
+	#$Monster2.die.connect(monster_die)
+	#get_berserk.connect($Monster2.set_slime_pos)
+	#$Monster2.nam = "name"
+	#$Monster3.die.connect(monster_die)
+	#get_berserk.connect($Monster3.set_slime_pos)
+	
 	AudioManager.play_random_ingame()
 	var background = $Background
 	var d = randi() % 10 + 1
@@ -98,6 +114,11 @@ func _ready() -> void:
 
 
 func monster_die(player_id:int):
+	delay_time_to_emit_pos = 0
+	is_monster_berserk = true
+	slime_to_chase = player_id
+	recent_die = true
+	
 	if player_id == 1 or Global.player_mode == 1:
 		kills += 1
 		score += 5
@@ -197,6 +218,7 @@ func _on_chest_break(chest_pos):
 		transform_pos = Vector2(0, 10)
 	elif roll < 95:
 		created_scene = monster_scene.instantiate()
+		get_berserk.connect(created_scene.set_slime_pos)
 		created_scene.die.connect(monster_die)
 	else:
 		return # 5% chance to do nothing
@@ -204,8 +226,7 @@ func _on_chest_break(chest_pos):
 	created_scene.position = chest_pos + transform_pos
 	add_child(created_scene)
 
-
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if (floor(time_elapsed/TIME_TO_CHANGE_DIFF) > difficulty):
 		$MonsterSpawnTimer.wait_time *= time_decrease_factor
 		$ChestSpawnTimer.wait_time *= time_decrease_factor
@@ -226,7 +247,30 @@ func _process(_delta: float) -> void:
 		if distance <= screen_width:
 			$ViewPortBoundary/LeftShape.position.x = left.position.x -32
 			$ViewPortBoundary/RightShape.position.x = right.position.x + 32
-
+	
+	if is_monster_berserk:
+		
+		berserk_time -= delta
+		if delay_time_to_emit_pos <= 0:
+			delay_time_to_emit_pos = TIME_TO_EMIT_POS
+			if Global.player_mode == 1 or slime_to_chase == 1:
+				if slime.hp <= 0:
+					get_berserk.emit(null, false)
+				else:
+					get_berserk.emit(slime.position, recent_die)
+			else:
+				if slime2.hp <= 0:
+					get_berserk.emit(null, false)
+				else:
+					get_berserk.emit(slime2.position, recent_die)
+			recent_die = false
+		
+		delay_time_to_emit_pos -= delta
+		
+		if berserk_time <= 0:
+			is_monster_berserk = false
+			berserk_time = BERSERK_TIME_CONSTANT
+			get_berserk.emit(null, false)
 
 func _on_chest_spawn_timer_timeout() -> void:
 	if not game_over:
@@ -252,9 +296,7 @@ func spawn_monster():
 	monster_spawn_location.progress_ratio = randf()
 	
 	var monster: Monster = monster_scene.instantiate()
+	get_berserk.connect(monster.set_slime_pos)
 	monster.die.connect(monster_die)
 	monster.position = monster_spawn_location.position
-	#monster.position = Vector2(50, -320)
 	add_child(monster)
-	# Confirm this monster's AnimationPlayer is unique
-	assert(monster.get_node("AnimationPlayer") != null)

@@ -181,7 +181,8 @@ func handle_input_1_player() -> void:
 		create_jump_effect()
 		jump_combo -= 1
 		velocity.y = JUMP_VELOCITY
-		
+	if Input.is_action_just_pressed("down_single") and is_on_floor():
+		position.y += 8
 	
 
 func handle_input_2_players() -> void:
@@ -202,20 +203,8 @@ func handle_input_2_players() -> void:
 		create_jump_effect()
 		jump_combo -= 1
 		velocity.y = JUMP_VELOCITY
-	#elif player_id == 2:
-		#if Input.is_action_just_pressed("attack_p2") and can_attack:
-			#can_attack = false
-			#hit_objects.clear()		
-			#combo_step += 1
-			#is_attacking = true
-			#has_attacked = false
-#
-		#direction = Input.get_action_strength("move_right_p2") - Input.get_action_strength("move_left_p2")
-		#if Input.is_action_just_pressed("jump_p2") and jump_combo > 0:
-			#get_node("Jump%d" % player_id).play()
-			#create_jump_effect()
-			#jump_combo -= 1
-			#velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("move_down_p%d" % player_id) and is_on_floor():
+		position.y += 8
 
 
 func _on_animation_finished():
@@ -250,7 +239,6 @@ func hurt() -> void:
 
 func respawn_back() -> void:
 	velocity = Vector2(0, 0)
-	position.x = 0
 	position.y = -get_viewport().get_visible_rect().size.y/2 + 100
 	hp -= 1
 	update_hp.emit()

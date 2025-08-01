@@ -6,8 +6,8 @@ var best_score = 0
 var best_kills = 0
 var best_coins = 0
 var best_time = 0
-var music = true
-var sound = true
+var music = false
+var sound = false
 
 func toggle_music() :
 	music = !music

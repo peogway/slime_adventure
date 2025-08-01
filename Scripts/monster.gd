@@ -6,13 +6,15 @@ class_name Monster extends CharacterBody2D
 signal healthChanged
 signal die(player_id:int)
 #signal monster_attacked(monster_pos: Vector2, player_id: int, combo: int)
-
-
+const TOUCH_TIME_CONST = 0.5
+var touch_time = TOUCH_TIME_CONST
+var touch_player = false
 
 var monster = 0
 const monsters_move_list = ["ladybird_move", "frog_move", "worm_green_move", "worm_move"]
 const monsters_stop_list = ["ladybird_stop", "frog_stop", "worm_green_stop", "worm_stop"]
 var speed := -200
+var berserck_speed = -250
 var facing_left := true
 
 @export var knockbackPower:int = 15
@@ -30,26 +32,75 @@ var is_hurt = false
 @onready var animated_player = $AnimationPlayer
 
 var dropped = false
+const JUMP_VELOCITY = -400.0
+var go_down = false
 
 func _ready() -> void:
+	$Warning.visible = false
 	$TextureProgressBar.visible = false
 	monster = randi() % monsters_move_list.size()
 
 var knockBackDirection
+var slime_pos = null
+var tem_slime_pos = null
+var horizontal_direction = null
+var jump = 1
+var falling_too_far = false
+var direction_to_center
+
+
+func _process(delta: float) -> void:
+	if touch_player:
+		touch_time -= delta
+		if touch_time <= 0:
+			touch_player = false
+			touch_time = TOUCH_TIME_CONST
+	
+
+func set_slime_pos(pos, recent_die: bool):
+	if recent_die and currentHealth >= 0:
+		$AnimationPlayer.play("Blink")
+	tem_slime_pos = pos
+	if tem_slime_pos == null:
+		slime_pos = null
+	
+func _physics_process(delta: float) -> void:
+	if position.y > 700: 
+		falling_too_far = true
+		position.y = -2547.0/2 + 100
 
 
 	
-func _physics_process(delta: float) -> void:
-	if position.y > 1500: 
-		queue_free()
 	if !is_on_floor():
-		velocity += get_gravity() *0.4 * delta
-		move_and_slide()
+		if dropped:
+			velocity += get_gravity() * delta
+		else:
+			velocity += get_gravity() *0.4 * delta
 	else:
+		falling_too_far = false
+		slime_pos = tem_slime_pos
+		if slime_pos:
+			horizontal_direction = sign(slime_pos.x - position.x)
+		go_down = false
+		jump = 1
 		$Sprite2D.visible = false
 		if !dropped:
 			dropped = true
 			$ChestDrop.play()
+	
+	if falling_too_far:
+		if position.x > 0:
+			if !facing_left:
+				flip()
+			velocity.x = speed
+		elif position.x < 0:
+			if facing_left:
+				flip()
+			velocity.x = speed
+		move_and_slide()
+		return
+	
+	
 	if is_hurt:
 		velocity = knockBackDirection
 		animated_sprite.play(monsters_stop_list[monster])
@@ -58,6 +109,13 @@ func _physics_process(delta: float) -> void:
 		
 	animated_sprite.play(monsters_move_list[monster])
 	
+
+	
+	if slime_pos:
+		handle_physics_berserk()
+		return	
+		
+	
 	
 	if (!ray_vertical.is_colliding() and is_on_floor()) or (ray_horizontal.is_colliding() and ray_horizontal.get_collider() is not Player) or (ray_body.is_colliding()):
 		if ray_body.is_colliding() and ray_body.get_collider() is Player:
@@ -65,14 +123,60 @@ func _physics_process(delta: float) -> void:
 		flip()
 	if dropped:
 		velocity.x = speed
-	move_and_slide()
 		
+	if touch_player and is_on_floor():
+		if speed < 0 : 
+			velocity.x += 100
+		else:
+			velocity.x -= 100
+		
+	move_and_slide()
+
+
+
+func handle_physics_berserk():
+	var height = (JUMP_VELOCITY * JUMP_VELOCITY) / (2 * get_gravity().y)
+	if position.y - 40 <= slime_pos.y:
+		if (horizontal_direction > 0 and facing_left) or (horizontal_direction < 0 and !facing_left) :
+			flip()
+			
+		if !is_on_floor() and !go_down:
+			if jump > 0:
+				jump -= 1
+				velocity.y += JUMP_VELOCITY
+		else:
+			if position.y <= slime_pos.y and abs(position.x - slime_pos.x) <= 200:
+				go_down = true
+				position.y += 8
+		velocity.x = horizontal_direction * abs(berserck_speed)
+	
+	elif height <= position.y - slime_pos.y -40:
+		if (!ray_vertical.is_colliding() and is_on_floor()) or ray_horizontal.is_colliding():
+			flip()
+		velocity.x = berserck_speed
+	else:
+		if !is_on_floor() or slime_pos.y < position.y - 40:
+			if jump > 0:
+				jump -= 1
+				velocity.y += JUMP_VELOCITY
+		if (horizontal_direction > 0 and facing_left) or (horizontal_direction < 0 and !facing_left) :
+			flip()
+		velocity.x = berserck_speed
+		
+	if touch_player and is_on_floor():
+		if speed < 0 : 
+			velocity.x += 100
+		else:
+			velocity.x -= 100
+	move_and_slide()
+	
 
 func flip():
 	facing_left = !facing_left
 	
-	scale.x = scale.x * -1
-	speed = speed * -1
+	scale.x *= -1
+	speed *= -1
+	berserck_speed *= -1
 	#if facing_left:
 		#speed = abs(speed) * -1
 	#else:
@@ -111,8 +215,9 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	if is_hurt:
 		return
 	if body is Player:
-		if !body.is_hurt:
-			body.hurt()
+		touch_player = true
+
+		body.hurt()
 		if (ray_horizontal.is_colliding() and ray_horizontal.get_collider() is Player):
 			flip()
 

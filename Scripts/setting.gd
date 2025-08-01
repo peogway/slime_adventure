@@ -103,7 +103,6 @@ func _on_btn_sound_click() -> void:
 
 func _on_btn_sound_off_click() -> void:
 	Global.toggle_sound()
-	$Click.play()
 
 	soundOnNode.visible = true
 	soundOffNode.visible = false

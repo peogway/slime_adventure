@@ -62,12 +62,9 @@ func _on_music_button_pressed() -> void:
 func _on_sound_button_pressed() -> void:
 	if instructions != null:
 		return
-	if (Global.sound):
-		$Click.play()
-		Global.toggle_sound()
-	else:
-		Global.toggle_sound()
-		$Click.play()
+	$Click.play()
+	Global.toggle_sound()
+
 	
 	soundBtn.get_node("SoundOn").visible = !soundBtn.get_node("SoundOn").visible
 	soundBtn.get_node("SoundOff").visible = !soundBtn.get_node("SoundOff").visible

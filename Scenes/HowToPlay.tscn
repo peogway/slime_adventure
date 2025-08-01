@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bkbmwduxbkpi6"]
+[gd_scene load_steps=49 format=3 uid="uid://bkbmwduxbkpi6"]
 
 [ext_resource type="Script" uid="uid://6kxjn6ghxl5h" path="res://Scripts/how_to_play.gd" id="1_wbcyv"]
 [ext_resource type="Texture2D" uid="uid://cmny28217uflm" path="res://Assets/GUI/settings/bg.png" id="2_r8rx6"]
@@ -19,7 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://cmxd7frhslilm" path="res://Assets/keys_instruction/letter-j.png" id="15_icywa"]
 [ext_resource type="Texture2D" uid="uid://3pbmt7hgcnhw" path="res://Assets/keys_instruction/joystick.png" id="15_twhdt"]
 [ext_resource type="Texture2D" uid="uid://d1hmj46ts7j0o" path="res://Assets/keys_instruction/square.png" id="17_f7s7u"]
+[ext_resource type="Texture2D" uid="uid://p5j2o1dclfmb" path="res://Assets/keys_instruction/letter-s.png" id="18_uwl0s"]
 [ext_resource type="Texture2D" uid="uid://bi1pqm6ske2ja" path="res://Assets/Player/Blue_Slime/Animation/Idle.png" id="19_f8nnt"]
+[ext_resource type="Texture2D" uid="uid://fs6crbh2o1fw" path="res://Assets/keys_instruction/down-arrow.png" id="19_twhdt"]
 [ext_resource type="Texture2D" uid="uid://c2b5oekuvioru" path="res://Assets/Player/Red_Slime/Animation/Idle.png" id="20_2bqsr"]
 [ext_resource type="Texture2D" uid="uid://ba5xsd52tqt41" path="res://Assets/keys_instruction/line.png" id="21_2bqsr"]
 [ext_resource type="AudioStream" uid="uid://cnacqddmh1ans" path="res://Assets/Sounds/others/mouse-click.mp3" id="23_hg86a"]
@@ -282,9 +284,9 @@ offset_bottom = -265.0
 [node name="Or8" type="Label" parent="Slashes1"]
 z_index = 25
 layout_mode = 0
-offset_left = 196.0
+offset_left = 151.0
 offset_top = 231.0
-offset_right = 260.0
+offset_right = 215.0
 offset_bottom = 306.0
 theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
@@ -293,9 +295,9 @@ text = "/"
 [node name="Or7" type="Label" parent="Slashes1"]
 z_index = 25
 layout_mode = 0
-offset_left = 412.0
+offset_left = 399.0
 offset_top = 231.0
-offset_right = 476.0
+offset_right = 463.0
 offset_bottom = 306.0
 theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
@@ -304,9 +306,9 @@ text = "/"
 [node name="Or4" type="Label" parent="Slashes1"]
 z_index = 25
 layout_mode = 0
-offset_left = 412.0
+offset_left = 399.0
 offset_top = 149.0
-offset_right = 476.0
+offset_right = 463.0
 offset_bottom = 224.0
 theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
@@ -315,9 +317,9 @@ text = "/"
 [node name="Or2" type="Label" parent="Slashes1"]
 z_index = 25
 layout_mode = 0
-offset_left = 412.0
+offset_left = 399.0
 offset_top = 82.0
-offset_right = 476.0
+offset_right = 463.0
 offset_bottom = 157.0
 theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
@@ -326,9 +328,9 @@ text = "/"
 [node name="Or3" type="Label" parent="Slashes1"]
 z_index = 25
 layout_mode = 0
-offset_left = 196.0
+offset_left = 151.0
 offset_top = 82.0
-offset_right = 260.0
+offset_right = 215.0
 offset_bottom = 157.0
 theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
@@ -338,9 +340,9 @@ text = "/
 [node name="Or" type="Label" parent="Slashes1"]
 z_index = 25
 layout_mode = 0
-offset_left = 195.0
+offset_left = 150.0
 offset_top = 149.0
-offset_right = 259.0
+offset_right = 214.0
 offset_bottom = 224.0
 theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
@@ -357,9 +359,9 @@ offset_bottom = -265.0
 [node name="Or8" type="Label" parent="Slashes2"]
 z_index = 25
 layout_mode = 0
-offset_left = 340.0
+offset_left = 359.0
 offset_top = 519.0
-offset_right = 404.0
+offset_right = 423.0
 offset_bottom = 594.0
 theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
@@ -379,9 +381,9 @@ text = "/"
 [node name="Or4" type="Label" parent="Slashes2"]
 z_index = 25
 layout_mode = 0
-offset_left = 339.0
+offset_left = 358.0
 offset_top = 400.0
-offset_right = 403.0
+offset_right = 422.0
 offset_bottom = 475.0
 theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
@@ -401,9 +403,9 @@ text = "/"
 [node name="Or3" type="Label" parent="Slashes2"]
 z_index = 25
 layout_mode = 0
-offset_left = 104.0
+offset_left = 136.0
 offset_top = 400.0
-offset_right = 142.0
+offset_right = 174.0
 offset_bottom = 470.0
 theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
@@ -413,9 +415,9 @@ text = "/
 [node name="Or" type="Label" parent="Slashes2"]
 z_index = 25
 layout_mode = 0
-offset_left = 105.0
+offset_left = 136.0
 offset_top = 519.0
-offset_right = 169.0
+offset_right = 200.0
 offset_bottom = 594.0
 theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
@@ -489,9 +491,9 @@ text = "jump
 [node name="Move2P" type="Label" parent="."]
 z_index = 25
 layout_mode = 0
-offset_left = -166.0
+offset_left = -155.0
 offset_top = 30.0
-offset_right = -53.0
+offset_right = -42.0
 offset_bottom = 101.0
 theme_override_colors/font_color = Color(0.80284, 0.989162, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -502,9 +504,9 @@ text = "move"
 [node name="Jump2P" type="Label" parent="."]
 z_index = 25
 layout_mode = 0
-offset_left = 102.0
+offset_left = 121.0
 offset_top = 30.0
-offset_right = 210.0
+offset_right = 229.0
 offset_bottom = 103.0
 theme_override_colors/font_color = Color(0.80284, 0.989162, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -550,77 +552,87 @@ position = Vector2(-725, 134)
 
 [node name="Left-arrow" type="Sprite2D" parent="1p"]
 z_index = 25
-position = Vector2(792, -330)
+position = Vector2(753, -330)
 texture = ExtResource("6_icywa")
 
 [node name="Letter-a" type="Sprite2D" parent="1p"]
 z_index = 25
-position = Vector2(583, -330)
+position = Vector2(506, -330)
 texture = ExtResource("7_cqyoh")
 
 [node name="Letter-d" type="Sprite2D" parent="1p"]
 z_index = 25
-position = Vector2(629, -330)
+position = Vector2(598, -330)
 texture = ExtResource("9_f8nnt")
 
 [node name="Letter-w" type="Sprite2D" parent="1p"]
 z_index = 25
-position = Vector2(607, -260)
+position = Vector2(552, -260)
 texture = ExtResource("11_l4nhs")
 
 [node name="Right-arrow" type="Sprite2D" parent="1p"]
 z_index = 25
-position = Vector2(838, -330)
+position = Vector2(846, -330)
 texture = ExtResource("12_hg86a")
 
 [node name="Space" type="Sprite2D" parent="1p"]
 z_index = 25
-position = Vector2(816, -177)
+position = Vector2(798, -177)
 texture = ExtResource("13_tvr0b")
 
 [node name="Cross" type="Sprite2D" parent="1p"]
 z_index = 25
-position = Vector2(1032, -262.8)
+position = Vector2(994, -262.8)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("14_uwl0s")
 
 [node name="Joystick" type="Sprite2D" parent="1p"]
 z_index = 25
-position = Vector2(1032, -338.8)
+position = Vector2(994, -338.8)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("15_twhdt")
 
 [node name="Square" type="Sprite2D" parent="1p"]
 z_index = 25
-position = Vector2(1032, -178.8)
+position = Vector2(994, -178.8)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("17_f7s7u")
 
 [node name="Up-arrow" type="Sprite2D" parent="1p"]
 z_index = 25
-position = Vector2(817, -260)
+position = Vector2(799, -260)
 texture = ExtResource("15_cqyoh")
 
 [node name="Letter-j" type="Sprite2D" parent="1p"]
 z_index = 25
-position = Vector2(606, -179)
+position = Vector2(551, -179)
 texture = ExtResource("15_icywa")
+
+[node name="Letter-s" type="Sprite2D" parent="1p"]
+z_index = 25
+position = Vector2(552, -330)
+texture = ExtResource("18_uwl0s")
+
+[node name="Down-arrow" type="Sprite2D" parent="1p"]
+z_index = 25
+position = Vector2(800, -330)
+texture = ExtResource("19_twhdt")
 
 [node name="2p" type="Node2D" parent="."]
 
 [node name="Right-arrow" type="Sprite2D" parent="2p"]
 z_index = 25
-position = Vector2(-142, 240)
+position = Vector2(-110, 240)
 texture = ExtResource("12_hg86a")
 
 [node name="Left-arrow" type="Sprite2D" parent="2p"]
 z_index = 25
-position = Vector2(-188, 240)
+position = Vector2(-202, 240)
 texture = ExtResource("6_icywa")
 
 [node name="Up-arrow" type="Sprite2D" parent="2p"]
 z_index = 25
-position = Vector2(95, 240)
+position = Vector2(114, 240)
 texture = ExtResource("15_cqyoh")
 
 [node name="Letter-k" type="Sprite2D" parent="2p"]
@@ -630,17 +642,17 @@ texture = ExtResource("10_2bqsr")
 
 [node name="Letter-a" type="Sprite2D" parent="2p"]
 z_index = 25
-position = Vector2(-189, 120)
+position = Vector2(-203, 120)
 texture = ExtResource("7_cqyoh")
 
 [node name="Letter-d" type="Sprite2D" parent="2p"]
 z_index = 25
-position = Vector2(-143, 120)
+position = Vector2(-111, 120)
 texture = ExtResource("9_f8nnt")
 
 [node name="Letter-w" type="Sprite2D" parent="2p"]
 z_index = 25
-position = Vector2(93, 120)
+position = Vector2(112, 120)
 texture = ExtResource("11_l4nhs")
 
 [node name="Letter-c" type="Sprite2D" parent="2p"]
@@ -662,27 +674,37 @@ texture = ExtResource("17_f7s7u")
 
 [node name="Cross" type="Sprite2D" parent="2p"]
 z_index = 25
-position = Vector2(172, 120)
+position = Vector2(191, 120)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("14_uwl0s")
 
 [node name="Cross2" type="Sprite2D" parent="2p"]
 z_index = 25
-position = Vector2(172, 240)
+position = Vector2(191, 240)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("14_uwl0s")
 
 [node name="Joystick" type="Sprite2D" parent="2p"]
 z_index = 25
-position = Vector2(-67, 120)
+position = Vector2(-35, 120)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("15_twhdt")
 
 [node name="Joystick2" type="Sprite2D" parent="2p"]
 z_index = 25
-position = Vector2(-65, 240)
+position = Vector2(-33, 240)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("15_twhdt")
+
+[node name="Letter-s" type="Sprite2D" parent="2p"]
+z_index = 25
+position = Vector2(-157, 120)
+texture = ExtResource("18_uwl0s")
+
+[node name="Down-arrow" type="Sprite2D" parent="2p"]
+z_index = 25
+position = Vector2(-156, 240)
+texture = ExtResource("19_twhdt")
 
 [node name="Blue" type="AnimatedSprite2D" parent="."]
 z_index = 25

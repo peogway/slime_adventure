@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dsfdy3gwhsvh1"]
+[gd_scene load_steps=26 format=3 uid="uid://dsfdy3gwhsvh1"]
 
 [ext_resource type="Script" uid="uid://leom52y0ywll" path="res://Scripts/monster.gd" id="1_yyra8"]
 [ext_resource type="Texture2D" uid="uid://bnfc4qpcrfgq1" path="res://Assets/spritesheet_complete.png" id="2_brqr3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://b355yon1t7vva" path="res://Scripts/healthBar.gd" id="5_wp20p"]
 [ext_resource type="AudioStream" uid="uid://dwtx6khmgjwt2" path="res://Assets/Sounds/others/chest/chest_drop.mp3" id="7_vqjk1"]
 [ext_resource type="Texture2D" uid="uid://d04m3l6qx84f2" path="res://Assets/Art/parachute.png" id="8_rof6c"]
+[ext_resource type="Texture2D" uid="uid://7v7cwj7c38o3" path="res://Assets/Art/warning.png" id="9_rof6c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wp20p"]
 shader = ExtResource("2_i0esf")
@@ -133,6 +134,21 @@ height = 26.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wqfq0"]
 
+[sub_resource type="Animation" id="Animation_faqp6"]
+resource_name = "Blink"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Warning:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false]
+}
+
 [sub_resource type="Animation" id="Animation_i0esf"]
 length = 0.001
 tracks/0/type = "value"
@@ -146,6 +162,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Warning:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_wp20p"]
@@ -166,6 +194,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i0esf"]
 _data = {
+&"Blink": SubResource("Animation_faqp6"),
 &"RESET": SubResource("Animation_i0esf"),
 &"hit_flash": SubResource("Animation_wp20p")
 }
@@ -232,6 +261,11 @@ stream = ExtResource("7_vqjk1")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, -28)
 texture = ExtResource("8_rof6c")
+
+[node name="Warning" type="Sprite2D" parent="."]
+position = Vector2(-41, -9)
+rotation = -0.427606
+texture = ExtResource("9_rof6c")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

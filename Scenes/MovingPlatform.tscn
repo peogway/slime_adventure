@@ -1,0 +1,111 @@
+[gd_scene load_steps=8 format=3 uid="uid://b82dttmbydpj"]
+
+[ext_resource type="Script" uid="uid://bm4f747d2qmpj" path="res://Scripts/moving_platform.gd" id="1_5olv3"]
+[ext_resource type="Texture2D" uid="uid://b65rfm6hjg6is" path="res://Assets/Tileset/GUI.png" id="1_k502f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k502f"]
+size = Vector2(236, 20)
+
+[sub_resource type="Animation" id="Animation_cbc1i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pbjlq"]
+resource_name = "left_right"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(400, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5olv3"]
+resource_name = "up_down"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 147), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fl5gg"]
+_data = {
+&"RESET": SubResource("Animation_cbc1i"),
+&"left_right": SubResource("Animation_pbjlq"),
+&"up_down": SubResource("Animation_5olv3")
+}
+
+[node name="MovingPlatform" type="Node2D"]
+script = ExtResource("1_5olv3")
+
+[node name="Platform" type="AnimatableBody2D" parent="."]
+collision_layer = 15
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform"]
+position = Vector2(-92, 0)
+texture = ExtResource("1_k502f")
+region_enabled = true
+region_rect = Rect2(192, 64, 48, 16)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Platform"]
+position = Vector2(-47, 0)
+texture = ExtResource("1_k502f")
+region_enabled = true
+region_rect = Rect2(192, 64, 48, 16)
+
+[node name="Sprite2D3" type="Sprite2D" parent="Platform"]
+position = Vector2(-2, 0)
+texture = ExtResource("1_k502f")
+region_enabled = true
+region_rect = Rect2(192, 64, 48, 16)
+
+[node name="Sprite2D4" type="Sprite2D" parent="Platform"]
+position = Vector2(43, 0)
+texture = ExtResource("1_k502f")
+region_enabled = true
+region_rect = Rect2(192, 64, 48, 16)
+
+[node name="Sprite2D5" type="Sprite2D" parent="Platform"]
+position = Vector2(88, 0)
+texture = ExtResource("1_k502f")
+region_enabled = true
+region_rect = Rect2(192, 64, 48, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_k502f")
+one_way_collision = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platform"]
+libraries = {
+&"": SubResource("AnimationLibrary_fl5gg")
+}
+autoplay = "up_down"
