@@ -23,6 +23,12 @@ func _ready() -> void:
 	gravity_scale = 0.2
 	pass # Replace with function body.
 
+func _integrate_forces(state):
+	var vel = state.get_linear_velocity()
+	vel.x = 0  # zero horizontal inertia
+	vel.y = vel.y  # keep vertical (gravity)
+	state.set_linear_velocity(vel)
+	state.set_angular_velocity(0)
 
 func _physics_process(_delta: float) -> void:
 	if $RayCast2D.is_colliding() and !dropped:
@@ -31,6 +37,7 @@ func _physics_process(_delta: float) -> void:
 			dropped = true
 			$ChestDrop.play()
 			$Sprite2D.visible = false
+			
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

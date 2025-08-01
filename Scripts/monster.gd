@@ -14,7 +14,7 @@ var monster = 0
 const monsters_move_list = ["ladybird_move", "frog_move", "worm_green_move", "worm_move"]
 const monsters_stop_list = ["ladybird_stop", "frog_stop", "worm_green_stop", "worm_stop"]
 var speed := -200
-var berserck_speed = -250
+var berserk_speed = -250
 var facing_left := true
 
 @export var knockbackPower:int = 15
@@ -35,10 +35,6 @@ var dropped = false
 const JUMP_VELOCITY = -400.0
 var go_down = false
 
-func _ready() -> void:
-	$Warning.visible = false
-	$TextureProgressBar.visible = false
-	monster = randi() % monsters_move_list.size()
 
 var knockBackDirection
 var slime_pos = null
@@ -47,7 +43,25 @@ var horizontal_direction = null
 var jump = 1
 var falling_too_far = false
 var direction_to_center
+const TIME_DELAY_JUMP = 1
+var delay_jump = TIME_DELAY_JUMP
+var jump_cooldown = 0.5
+var can_jump = true
+var floor_time = 0
+var reached = false
 
+
+func _ready() -> void:
+	var addition_speed = randi() % 30 + 1
+	if randi() % 2 == 0:
+		speed += addition_speed
+		berserk_speed += 1.25*addition_speed
+	else:
+		speed -= addition_speed
+		berserk_speed -= 1.25*addition_speed
+	$Warning.visible = false
+	$TextureProgressBar.visible = false
+	monster = randi() % monsters_move_list.size()
 
 func _process(delta: float) -> void:
 	if touch_player:
@@ -65,6 +79,7 @@ func set_slime_pos(pos, recent_die: bool):
 		slime_pos = null
 	
 func _physics_process(delta: float) -> void:
+	delay_jump -= delta
 	if position.y > 700: 
 		falling_too_far = true
 		position.y = -2547.0/2 + 100
@@ -72,17 +87,21 @@ func _physics_process(delta: float) -> void:
 
 	
 	if !is_on_floor():
+		floor_time = 0
 		if dropped:
 			velocity += get_gravity() * delta
 		else:
 			velocity += get_gravity() *0.4 * delta
 	else:
+		delay_jump -= delta
+		if delay_jump <= 0:
+			jump = 1
+		floor_time += delta
 		falling_too_far = false
 		slime_pos = tem_slime_pos
 		if slime_pos:
 			horizontal_direction = sign(slime_pos.x - position.x)
 		go_down = false
-		jump = 1
 		$Sprite2D.visible = false
 		if !dropped:
 			dropped = true
@@ -111,7 +130,7 @@ func _physics_process(delta: float) -> void:
 	
 
 	
-	if slime_pos:
+	if slime_pos and !reached:
 		handle_physics_berserk()
 		return	
 		
@@ -135,34 +154,38 @@ func _physics_process(delta: float) -> void:
 
 
 func handle_physics_berserk():
-	var height = (JUMP_VELOCITY * JUMP_VELOCITY) / (2 * get_gravity().y)
-	if position.y - 40 <= slime_pos.y:
-		if (horizontal_direction > 0 and facing_left) or (horizontal_direction < 0 and !facing_left) :
+	var height = (JUMP_VELOCITY * JUMP_VELOCITY) / (2 * get_gravity().y)	
+	if position.y -51 < slime_pos.y:
+		if (horizontal_direction > 0 and facing_left) or (horizontal_direction < 0 and !facing_left):
 			flip()
 			
-		if !is_on_floor() and !go_down:
+		if !is_on_floor() and !go_down and abs(position.x - slime_pos.x) >= 200:
 			if jump > 0:
 				jump -= 1
 				velocity.y += JUMP_VELOCITY
 		else:
-			if position.y <= slime_pos.y and abs(position.x - slime_pos.x) <= 200:
+			if abs(position.x - slime_pos.x) <= 200 and floor_time >= 0.5:
 				go_down = true
 				position.y += 8
-		velocity.x = horizontal_direction * abs(berserck_speed)
+		velocity.x = berserk_speed
 	
-	elif height <= position.y - slime_pos.y -40:
+	elif height <= position.y - 31 - slime_pos.y:
 		if (!ray_vertical.is_colliding() and is_on_floor()) or ray_horizontal.is_colliding():
 			flip()
-		velocity.x = berserck_speed
+		velocity.x = berserk_speed
 	else:
-		if !is_on_floor() or slime_pos.y < position.y - 40:
+		if !is_on_floor() or ( position.y -31 > slime_pos.y ):
 			if jump > 0:
+				delay_jump = TIME_DELAY_JUMP
 				jump -= 1
-				velocity.y += JUMP_VELOCITY
+				velocity.y += JUMP_VELOCITY	
 		if (horizontal_direction > 0 and facing_left) or (horizontal_direction < 0 and !facing_left) :
+			print('flip can jump')
 			flip()
-		velocity.x = berserck_speed
+		velocity.x = berserk_speed
 		
+	
+	
 	if touch_player and is_on_floor():
 		if speed < 0 : 
 			velocity.x += 100
@@ -176,7 +199,7 @@ func flip():
 	
 	scale.x *= -1
 	speed *= -1
-	berserck_speed *= -1
+	berserk_speed *= -1
 	#if facing_left:
 		#speed = abs(speed) * -1
 	#else:

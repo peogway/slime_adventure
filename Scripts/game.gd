@@ -27,8 +27,8 @@ var wait_time_ratio: float = 1.0
 @onready var chest_spawn_location: PathFollow2D = $ChestSpawn/PathFollow2D
 @onready var monster_spawn_location: PathFollow2D = $MonsterSpawn/PathFollow2D
 
-const BERSERK_TIME_CONSTANT = 30
-const TIME_TO_EMIT_POS = 0.5
+const BERSERK_TIME_CONSTANT = 5
+const TIME_TO_EMIT_POS = 1
 var delay_time_to_emit_pos = TIME_TO_EMIT_POS
 var berserk_time = BERSERK_TIME_CONSTANT
 var is_monster_berserk = false
@@ -56,6 +56,11 @@ var kills2 = 0
 var slime = null
 var slime2 = null
 
+var old_pos = null
+var old_pos2 = null
+var time_update_old_pos = 0
+
+
 var game_over = false
 
 const TIME_TO_CHANGE_DIFF = 60
@@ -68,13 +73,14 @@ var is_dead2 = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#$Monster.die.connect(monster_die)
-	#get_berserk.connect($Monster.set_slime_pos)
-	#$Monster2.die.connect(monster_die)
-	#get_berserk.connect($Monster2.set_slime_pos)
-	#$Monster2.nam = "name"
-	#$Monster3.die.connect(monster_die)
-	#get_berserk.connect($Monster3.set_slime_pos)
+	$Node2D/Monster.die.connect(monster_die)
+	get_berserk.connect($Node2D/Monster.set_slime_pos)
+	$Node2D/Monster2.die.connect(monster_die)
+	get_berserk.connect($Node2D/Monster2.set_slime_pos)
+	$Node2D/Monster3.die.connect(monster_die)
+	get_berserk.connect($Node2D/Monster3.set_slime_pos)
+	$Node2D/Monster4.die.connect(monster_die)
+	get_berserk.connect($Node2D/Monster4.set_slime_pos)
 	
 	AudioManager.play_random_ingame()
 	var background = $Background
@@ -242,6 +248,13 @@ func _on_chest_break(chest_pos):
 func _process(delta: float) -> void:
 	if is_dead and is_dead2:
 		return
+	time_update_old_pos += delta
+	if time_update_old_pos >= 0.7:
+		time_update_old_pos = 0
+		old_pos = slime.position
+		if slime2:
+			old_pos2 = slime2.position
+	
 	if (floor(time_elapsed/TIME_TO_CHANGE_DIFF) > difficulty):
 		$MonsterSpawnTimer.wait_time *= time_decrease_factor
 		$ChestSpawnTimer.wait_time *= time_decrease_factor
@@ -278,19 +291,19 @@ func _process(delta: float) -> void:
 	if is_monster_berserk:
 		
 		berserk_time -= delta
-		if delay_time_to_emit_pos <= 0:
-			delay_time_to_emit_pos = TIME_TO_EMIT_POS
-			if Global.player_mode == 1 or slime_to_chase == 1:
-				if slime.hp <= 0:
-					get_berserk.emit(null, false)
-				else:
-					get_berserk.emit(slime.position, recent_die)
+		if Global.player_mode == 1 or slime_to_chase == 1:
+			if slime.hp <= 0:
+				get_berserk.emit(null, false)
 			else:
-				if slime2.hp <= 0:
-					get_berserk.emit(null, false)
-				else:
-					get_berserk.emit(slime2.position, recent_die)
-			recent_die = false
+				get_berserk.emit(old_pos, recent_die)
+		else:
+			if slime2.hp <= 0:
+				get_berserk.emit(null, false)
+			else:
+				get_berserk.emit(old_pos2, recent_die)
+		recent_die = false
+		#if delay_time_to_emit_pos <= 0:
+			#delay_time_to_emit_pos = TIME_TO_EMIT_POS
 		
 		delay_time_to_emit_pos -= delta
 		
@@ -322,8 +335,8 @@ func spawn_chest():
 func spawn_monster():
 	monster_spawn_location.progress_ratio = randf()
 	
-	var monster: Monster = monster_scene.instantiate()
-	get_berserk.connect(monster.set_slime_pos)
-	monster.die.connect(monster_die)
-	monster.position = monster_spawn_location.position
-	add_child(monster)
+	#var monster: Monster = monster_scene.instantiate()
+	#get_berserk.connect(monster.set_slime_pos)
+	#monster.die.connect(monster_die)
+	#monster.position = monster_spawn_location.position
+	#add_child(monster)

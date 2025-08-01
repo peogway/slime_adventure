@@ -223,6 +223,8 @@ shape = SubResource("CapsuleShape2D_wqfq0")
 
 [node name="RayVertical" type="RayCast2D" parent="."]
 position = Vector2(-23, -9)
+rotation = 0.436332
+target_position = Vector2(5.11783, 58.2993)
 
 [node name="RayHorizontal" type="RayCast2D" parent="."]
 position = Vector2(17, 7)

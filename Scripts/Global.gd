@@ -1,7 +1,7 @@
 extends Node
 
-var player_mode = 2# 1 or 2
-var selected_character = 1
+var player_mode = 1# 1 or 2
+var selected_character = 2
 var best_score = 0
 var best_kills = 0
 var best_coins = 0
