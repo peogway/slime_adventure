@@ -72,6 +72,8 @@ var difficulty = 0
 var is_dead = false
 var is_dead2 = false
 
+var wave = 1
+var monsters_num = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -256,8 +258,6 @@ func _process(delta: float) -> void:
 			old_pos2 = slime2.position
 	
 	if (floor(time_elapsed/TIME_TO_CHANGE_DIFF) > difficulty):
-		$MonsterSpawnTimer.wait_time *= time_decrease_factor
-		$ChestSpawnTimer.wait_time *= time_decrease_factor
 		difficulty += 1
 		AudioManager.play_random_ingame()
 	
@@ -335,8 +335,8 @@ func spawn_chest():
 func spawn_monster():
 	monster_spawn_location.progress_ratio = randf()
 	
-	#var monster: Monster = monster_scene.instantiate()
-	#get_berserk.connect(monster.set_slime_pos)
-	#monster.die.connect(monster_die)
-	#monster.position = monster_spawn_location.position
-	#add_child(monster)
+	var monster: Monster = monster_scene.instantiate()
+	get_berserk.connect(monster.set_slime_pos)
+	monster.die.connect(monster_die)
+	monster.position = monster_spawn_location.position
+	add_child(monster)
