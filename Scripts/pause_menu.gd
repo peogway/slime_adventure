@@ -190,7 +190,6 @@ func _on_pause_button_pressed() -> void:
 	if instructions != null:
 		instructions._on_close_click()
 	$Click.play()
-	await $Click.finished
 
 	get_tree().paused = !get_tree().paused
 	
