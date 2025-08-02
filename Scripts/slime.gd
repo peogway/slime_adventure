@@ -43,7 +43,7 @@ var targets: Array = []
 var exp_ammount = 0
 
 var is_speed_boosted = false
-const SPEED_TIME = 10
+const SPEED_TIME = 15
 var speed_boost_time = SPEED_TIME
 
 # Health
@@ -227,7 +227,7 @@ func handle_input_2_players() -> void:
 func get_speed():
 	is_speed_boosted = true
 	speed_boost_time = SPEED_TIME
-	SPEED = 500
+	SPEED = 450
 	JUMP_VELOCITY = -500
 
 func _on_animation_finished():
@@ -280,9 +280,10 @@ func get_shield() -> void:
 	
 func get_exp() -> void:
 	exp_ammount += 1
-	if exp_ammount >= 15:
+	if exp_ammount >= 10:
 		exp_ammount = 0
 		lv += 1
+		$LevelUp.play()
 		hp += 1
 		update_hp.emit()
 		$Lv.text = "LV. %d" % lv

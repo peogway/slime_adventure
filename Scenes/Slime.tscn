@@ -1,4 +1,4 @@
-[gd_scene load_steps=157 format=3 uid="uid://cnw2au1gjibud"]
+[gd_scene load_steps=158 format=3 uid="uid://cnw2au1gjibud"]
 
 [ext_resource type="Script" uid="uid://xud3w1p6ebwm" path="res://Scripts/slime.gd" id="1_jokqx"]
 [ext_resource type="Texture2D" uid="uid://dd83ppwwixkgj" path="res://Assets/Art/spr_shield.png" id="2_xfmve"]
@@ -36,6 +36,7 @@
 [ext_resource type="AudioStream" uid="uid://ljtmipjvgqks" path="res://Assets/Sounds/slimes/red/fire_attack3.mp3" id="25_w0clf"]
 [ext_resource type="AudioStream" uid="uid://c4gao3hkoesaf" path="res://Assets/Sounds/others/lost_shield.mp3" id="26_2iyvh"]
 [ext_resource type="AudioStream" uid="uid://erx532uks80e" path="res://Assets/Sounds/slimes/touch_ground.mp3" id="36_k70q5"]
+[ext_resource type="AudioStream" uid="uid://bg65p6r7qcmhd" path="res://Assets/musics/level_up.mp3" id="37_fodhl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2bbhk"]
 atlas = ExtResource("2_y26kt")
@@ -1076,3 +1077,7 @@ bus = &"Sound"
 
 [node name="AttackDelayTimer" type="Timer" parent="."]
 wait_time = 0.2
+
+[node name="LevelUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("37_fodhl")
+bus = &"Sound"
