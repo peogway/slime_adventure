@@ -8,6 +8,10 @@ var has_click1 = false
 var has_click2 = false
 var has_click_back = false
 
+func _ready() -> void:
+	$Back.need_to_wait = false
+	$Back.play_sound = false
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("back") and instructions == null:
 		$Click.play()
@@ -63,4 +67,6 @@ func _on_back_click() -> void:
 	if has_click_back:
 		return
 	has_click_back = true
+	$Click.play()
+	await $Click.finished
 	get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
