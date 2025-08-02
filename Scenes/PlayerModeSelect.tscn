@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://bxtp3h6nenaji"]
 
 [ext_resource type="Script" uid="uid://veruews4bwsv" path="res://Scripts/player_mode_select.gd" id="1_w3jyv"]
-[ext_resource type="Texture2D" uid="uid://dun6tlj76f8w" path="res://Assets/backgrounds/10.png" id="2_t1xxt"]
+[ext_resource type="Texture2D" uid="uid://dun6tlj76f8w" path="res://Assets/backgrounds/2.png" id="2_t1xxt"]
 [ext_resource type="Texture2D" uid="uid://cmny28217uflm" path="res://Assets/GUI/settings/bg.png" id="3_bbamr"]
 [ext_resource type="Texture2D" uid="uid://7gqnbpwsmc1g" path="res://Assets/GUI/settings/table.png" id="4_vyb6j"]
 [ext_resource type="PackedScene" uid="uid://dsgnfyvl16pyv" path="res://Scenes/Button.tscn" id="5_n8snv"]
@@ -139,12 +139,14 @@ shape = SubResource("RectangleShape2D_wc8ny")
 
 [node name="Label" type="Label" parent="."]
 z_index = 1
-offset_left = -183.0
-offset_top = -275.0
-offset_right = 211.0
-offset_bottom = -204.0
+offset_left = -191.0
+offset_top = -263.0
+offset_right = 203.0
+offset_bottom = -192.0
 theme_override_colors/font_color = Color(0.803922, 0.988235, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("13_wc8ny")
 theme_override_font_sizes/font_size = 70
 text = "Mode select"
