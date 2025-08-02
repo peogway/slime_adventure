@@ -9,6 +9,7 @@ signal update_hp
 var move_audio = null
 @onready var attack_area: Area2D = $AttackArea2D
 @onready var attackDelayTimer = $AttackDelayTimer
+@onready var collision = $CollisionShape2D
 
 # Player Info
 @export var player_id = 1 # 1 or 2
@@ -121,6 +122,7 @@ func _physics_process(delta: float) -> void:
 		on_air = true
 		is_moving_sound_playing = false
 		velocity += get_gravity() * delta
+		collision.disabled = false
 	
 	if is_attacking or not is_on_floor() or is_hurt:
 		if is_moving_sound_playing:
@@ -195,7 +197,8 @@ func handle_input_1_player() -> void:
 		jump_combo -= 1
 		velocity.y = JUMP_VELOCITY
 	if Input.is_action_just_pressed("down_single") and is_on_floor():
-		position.y += 8
+		collision.disabled = true
+		position.y +=  8
 	
 
 func handle_input_2_players() -> void:
@@ -217,7 +220,8 @@ func handle_input_2_players() -> void:
 		jump_combo -= 1
 		velocity.y = JUMP_VELOCITY
 	if Input.is_action_just_pressed("move_down_p%d" % player_id) and is_on_floor():
-		position.y += 8
+		collision.disabled = true
+		position.y +=  8
 
 
 func get_speed():
