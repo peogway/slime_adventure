@@ -79,6 +79,9 @@ func set_slime_pos(pos, recent_die: bool):
 		slime_pos = null
 	
 func _physics_process(delta: float) -> void:
+	if currentHealth <= 0:
+		velocity = Vector2.ZERO
+		return
 	delay_jump -= delta
 	if position.y > 700: 
 		falling_too_far = true
@@ -121,7 +124,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if is_hurt:
-		velocity = knockBackDirection
+		velocity.x = knockBackDirection.x
 		animated_sprite.play(monsters_stop_list[monster])
 		move_and_slide()
 		return
@@ -180,7 +183,6 @@ func handle_physics_berserk():
 				jump -= 1
 				velocity.y += JUMP_VELOCITY	
 		if (horizontal_direction > 0 and facing_left) or (horizontal_direction < 0 and !facing_left) :
-			print('flip can jump')
 			flip()
 		velocity.x = berserk_speed
 		
@@ -200,10 +202,14 @@ func flip():
 	scale.x *= -1
 	speed *= -1
 	berserk_speed *= -1
-	#if facing_left:
-		#speed = abs(speed) * -1
-	#else:
-		#speed = abs(speed)
+	$TextureProgressBar.scale *= -1
+	if facing_left:
+		$TextureProgressBar.position.x -= 65
+		$TextureProgressBar.position.y -= 10
+		
+	else:
+		$TextureProgressBar.position.x += 65
+		$TextureProgressBar.position.y += 10
 
 
 func get_attack(player_id: int, player_damage, player_velocity):
