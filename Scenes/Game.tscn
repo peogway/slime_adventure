@@ -1,13 +1,14 @@
-[gd_scene load_steps=20 format=4 uid="uid://r2yyjygfy36f"]
+[gd_scene load_steps=21 format=4 uid="uid://r2yyjygfy36f"]
 
 [ext_resource type="Script" uid="uid://dmmdb76ten4w8" path="res://Scripts/game.gd" id="1_j5yw3"]
-[ext_resource type="Texture2D" uid="uid://dun6tlj76f8w" path="res://Assets/backgrounds/10.png" id="2_dahhg"]
+[ext_resource type="Texture2D" uid="uid://dun6tlj76f8w" path="res://Assets/backgrounds/2.png" id="2_dahhg"]
 [ext_resource type="PackedScene" uid="uid://cnw2au1gjibud" path="res://Scenes/Slime.tscn" id="5_bf53h"]
 [ext_resource type="AudioStream" uid="uid://cnacqddmh1ans" path="res://Assets/Sounds/others/mouse-click.mp3" id="6_7lihs"]
 [ext_resource type="Texture2D" uid="uid://b65rfm6hjg6is" path="res://Assets/Tileset/GUI.png" id="6_dahhg"]
 [ext_resource type="PackedScene" uid="uid://honmioa12jm3" path="res://Scenes/UI.tscn" id="7_fgofq"]
 [ext_resource type="Texture2D" uid="uid://bkmn4l13ebuxl" path="res://Assets/Tileset.png" id="8_3cx6b"]
 [ext_resource type="PackedScene" uid="uid://b82dttmbydpj" path="res://Scenes/MovingPlatform.tscn" id="8_dahhg"]
+[ext_resource type="AudioStream" uid="uid://c2l0nac2e83ew" path="res://Assets/musics/game_over_2p.mp3" id="11_3cx6b"]
 [ext_resource type="AudioStream" uid="uid://bc8guosq1oc6m" path="res://Assets/musics/winner_2p.mp3" id="12_3cx6b"]
 [ext_resource type="PackedScene" uid="uid://dmq8j3n7np71b" path="res://Scenes/PauseMenu.tscn" id="12_3so38"]
 [ext_resource type="AudioStream" uid="uid://drq3scg8isstd" path="res://Assets/musics/lose.mp3" id="13_3cx6b"]
@@ -271,7 +272,7 @@ sources/5 = SubResource("TileSetAtlasSource_alh3a")
 
 [sub_resource type="Curve2D" id="Curve2D_2irst"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1076, -638, 0, 0, 0, 0, -613, -630)
+"points": PackedVector2Array(0, 0, 0, 0, -613, -630, 0, 0, 0, 0, 1041, -641)
 }
 point_count = 2
 
@@ -293,11 +294,9 @@ size = Vector2(5.25, 1845)
 [node name="Game" type="Node2D"]
 script = ExtResource("1_j5yw3")
 
-[node name="PauseMenu" parent="." instance=ExtResource("12_3so38")]
-visible = false
-
 [node name="UI" parent="." instance=ExtResource("7_fgofq")]
-visible = false
+
+[node name="PauseMenu" parent="." instance=ExtResource("12_3so38")]
 
 [node name="Background" type="Sprite2D" parent="."]
 scale = Vector2(1.4, 1.4)
@@ -330,8 +329,8 @@ position = Vector2(-10, 1)
 curve = SubResource("Curve2D_2irst")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ChestSpawn"]
-position = Vector2(1076, -638)
-rotation = 3.13686
+position = Vector2(-613, -630)
+rotation = -0.00665045
 
 [node name="MonsterSpawn" type="Path2D" parent="."]
 curve = SubResource("Curve2D_bf53h")
@@ -357,16 +356,23 @@ position = Vector2(-940, 165)
 position = Vector2(446, -64)
 animation_track = 2
 
-[node name="Click" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_7lihs")
-bus = &"Sound"
-
 [node name="GameTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
 
-[node name="Winner2P" type="AudioStreamPlayer" parent="."]
+[node name="MonsterSpawnTimer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[node name="ChestSpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="NewRecord" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_3cx6b")
+bus = &"Music"
+
+[node name="GameOver2P" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_3cx6b")
 bus = &"Music"
 
 [node name="Lose" type="AudioStreamPlayer" parent="."]
@@ -374,11 +380,9 @@ stream = ExtResource("13_3cx6b")
 volume_db = -8.0
 bus = &"Music"
 
-[node name="MonsterSpawnTimer" type="Timer" parent="."]
-autostart = true
-
-[node name="ChestSpawnTimer" type="Timer" parent="."]
-autostart = true
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_7lihs")
+bus = &"Sound"
 
 [node name="ViewPortBoundary" type="StaticBody2D" parent="."]
 position = Vector2(0, 9)

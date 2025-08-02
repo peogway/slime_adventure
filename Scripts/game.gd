@@ -13,16 +13,14 @@ signal get_berserk(slime_pos)
 @export var boost_scene: PackedScene = load("res://Scenes/SpeedUp.tscn")
 
 
-@export_range(0, 1) var time_decrease_factor: float = 0.7
-
 
 @export var game_over_scene: PackedScene = preload("res://Scenes/GameOver.tscn")
 
 @onready var gui = $UI
 
 
-@export var monster_wait_time: float = 6.0
-@export var chest_wait_time: float = 15.0
+@export var monster_wait_time: float = 6
+@export var chest_wait_time: float = 10
 
 var wait_time_ratio: float = 1.0
 
@@ -74,12 +72,16 @@ var is_dead2 = false
 
 var wave = 1
 var monsters_num = 5
-
+var monsters_killed = 0
+var wave_cleared = false
+var monsters_respawned = 0
+var chests_respawned_num = 0
+var chest_max = 5
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	AudioManager.play_random_ingame()
 	var background = $Background
-	var d = randi() % 10 + 1
+	var d = randi() % 8 + 1
 	background.texture = load("res://Assets/backgrounds/%d.png" % d)
 	
 	
@@ -89,15 +91,12 @@ func _ready() -> void:
 	
 	
 	if Global.player_mode == 2:
-		#$SlimeBlue.remove_child($SlimeBlue/RemoteTransform2D)
-		#$SlimeRed.remove_child($SlimeRed/RemoteTransform2D)
 		slime = $SlimeBlue
 		slime2 = $SlimeRed
 		gui.update_lives_2(slime2.hp)
 		slime2.update_hp.connect(update_hp_2)
 		slime2.coin_collected.connect(collect_coin_2)
-		monster_wait_time /=2
-		chest_wait_time /= 2
+		chest_max *= 2
 	else:
 		is_dead2 = true
 		if Global.selected_character == 1:
@@ -116,16 +115,13 @@ func _ready() -> void:
 	
 	$MonsterSpawnTimer.wait_time = monster_wait_time
 	$ChestSpawnTimer.wait_time = chest_wait_time
+	
+	gui.play_wave(wave)
 
 
 
 
 func monster_die(player_id:int):
-	delay_time_to_emit_pos = 0
-	is_monster_berserk = true
-	slime_to_chase = player_id
-	recent_die = true
-	
 	if player_id == 1 or Global.player_mode == 1:
 		kills += 1
 		score += 5
@@ -136,7 +132,40 @@ func monster_die(player_id:int):
 		score2 += 5
 		gui.update_score_2(score2)
 		gui.update_kills_2(kills2)
+	
+	monsters_killed += 1
+	gui.update_monsters(monsters_killed, monsters_num)
+	if monsters_killed == monsters_num:
 
+		gui.update_monsters(monsters_killed, monsters_num)
+		wave += 1
+		monsters_respawned = 0
+		wave_cleared = true
+		
+		gui.play_clear(wave)
+		$MonsterSpawnTimer.start()
+		$ChestSpawnTimer.start()
+		await get_tree().create_timer(3).timeout
+		
+		wave_cleared = false
+		
+		monsters_num += int(monsters_num*0.4)
+		monsters_killed = 0
+		chests_respawned_num = 0
+		chest_max = monsters_num
+		if Global.player_mode == 2: chest_max *= 2
+		
+		gui.update_wave(wave)
+		gui.update_monsters(monsters_killed, monsters_num)
+		return
+
+	
+	delay_time_to_emit_pos = 0
+	is_monster_berserk = true
+	slime_to_chase = player_id
+	recent_die = true
+	
+	
 func update_hp_1():
 	gui.update_lives_1(slime.hp)
 	if slime.hp <= 0 : 
@@ -147,10 +176,10 @@ func update_hp_1():
 				game_over_func(2)
 		else:
 			if score > Global.best_score:
-				Global.save_score_setting(score, time_elapsed, kills, coins)
+				Global.save_score_setting(score, wave, time_elapsed, kills, coins)
 				new_best = true
 			if new_best:
-				$Winner2P.play()
+				$NewRecord.play()
 			else:
 				$Lose.play()	
 			game_over_func(2)
@@ -180,15 +209,17 @@ func game_over_func(die_first :int):
 	game_over_screen.kills = kills
 	game_over_screen.coins = coins
 	game_over_screen.time = time_elapsed
+	game_over_screen.wave = wave
 	
 	if score2 > score or (score2 == score and kills2 > kills) or (score2 == score and kills2 == kills and coins2 > coins) or (score2 == score and kills2 == kills and coins2 == coins and die_first == 1):
 		game_over_screen.winner = 2
 		game_over_screen.score = score2
 		game_over_screen.kills = kills2
 		game_over_screen.coins = coins2
+		
 	if Global.player_mode == 2:
 		game_over_screen.mode = 2
-		$Winner2P.play()
+		$GameOver2P.play()
 	else:
 		game_over_screen.winner = Global.selected_character
 		game_over_screen.new_best = new_best
@@ -211,8 +242,7 @@ func collect_coin_2():
 func _on_game_timer_timeout() -> void:
 	if game_over:
 		return
-	var time_now = Time.get_unix_time_from_system()
-	time_elapsed = time_now - start_time
+	time_elapsed += $GameTimer.wait_time
 	gui.set_time(time_elapsed)
 
 func _on_chest_break(chest_pos):
@@ -308,11 +338,13 @@ func _on_chest_spawn_timer_timeout() -> void:
 
 
 func _on_monster_spawn_timer_timeout() -> void:
-	if not game_over:
+	if not game_over and not wave_cleared:
 		spawn_monster()
 		
 		
 func spawn_chest():
+	if chests_respawned_num >= chest_max: return
+	chests_respawned_num += 1
 	chest_spawn_location.progress_ratio = randf()
 	
 	var chest: Chest = chest_scene.instantiate()
@@ -323,10 +355,15 @@ func spawn_chest():
 
 
 func spawn_monster():
-	monster_spawn_location.progress_ratio = randf()
-	
-	var monster: Monster = monster_scene.instantiate()
-	get_berserk.connect(monster.set_slime_pos)
-	monster.die.connect(monster_die)
-	monster.position = monster_spawn_location.position
-	add_child(monster)
+	for i in int(monsters_num / 3.0):
+		if monsters_respawned >= monsters_num:
+			break
+		monster_spawn_location.progress_ratio = randf()
+		monsters_respawned += 1
+		var monster: Monster = monster_scene.instantiate()
+		monster.maxHealth += (wave-1)*2
+		get_berserk.connect(monster.set_slime_pos)
+		monster.die.connect(monster_die)
+		monster.position = monster_spawn_location.position
+		add_child(monster)
+		await get_tree().create_timer(0.5).timeout
