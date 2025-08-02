@@ -306,7 +306,6 @@ texture = ExtResource("2_dahhg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_mode = 3
-position = Vector2(2, -1)
 limit_left = -1150
 limit_top = -650
 limit_right = 1150
@@ -385,7 +384,6 @@ stream = ExtResource("6_7lihs")
 bus = &"Sound"
 
 [node name="ViewPortBoundary" type="StaticBody2D" parent="."]
-position = Vector2(0, 9)
 collision_layer = 8
 collision_mask = 0
 
