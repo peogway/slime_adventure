@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://b2joyq4243b8s" path="res://Assets/Sounds/others/get_boost.mp3" id="4_tjev1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s8pff"]
-radius = 22.0227
+radius = 29.1548
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tjev1"]
 shader = ExtResource("1_s8pff")
@@ -21,6 +21,7 @@ shape = SubResource("CircleShape2D_s8pff")
 
 [node name="Run" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_tjev1")
+scale = Vector2(1.7, 1.7)
 texture = ExtResource("1_wxgud")
 
 [node name="GetFast" type="AudioStreamPlayer" parent="."]
