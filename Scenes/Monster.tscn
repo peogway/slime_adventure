@@ -242,7 +242,6 @@ offset_top = -18.0
 offset_right = 30.0
 offset_bottom = 22.0
 value = 100.0
-fill_mode = 1
 texture_under = ExtResource("3_fvjcv")
 texture_progress = ExtResource("4_i0esf")
 script = ExtResource("5_wp20p")
