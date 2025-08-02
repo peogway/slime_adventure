@@ -3,8 +3,10 @@ extends CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Slime1/Slime.play("default")
+	$WaveLabel.visible =false
+	$ClearLabel.visible = false
 	if Global.player_mode == 2:
+		$Slime1/Slime.play("default")
 		$Slime2/Slime.play("default")
 	else:
 		$Slime2/ScoreContainer/ScoreLabel.text = "Best Score: "
@@ -16,6 +18,30 @@ func _ready() -> void:
 		$Slime2/StatsContainer/CoinsCollected.text = str(Global.best_coins)
 		$Slime2/StatsContainer/space.visible = false
 		$Slime2/StatsContainer/space2.visible = false
+		if Global.selected_character == 2:
+			$Slime1/Slime.play("red")
+
+
+func play_clear(wave: int) -> void:
+	$Clear.play()
+	$ClearLabel.visible = true
+	await get_tree().create_timer(2).timeout
+	$ClearLabel.visible = false
+	await get_tree().create_timer(1).timeout
+	play_wave(wave)
+	
+func play_wave(wave: int) -> void:
+	$WaveLabel.text = "Wave %d" % wave
+	$WaveLabel.visible = true
+	await get_tree().create_timer(2).timeout
+	$WaveLabel.visible = false
+	
+
+func update_wave(wave: int) -> void:
+	$Wave/VBoxContainer/WaveContainter/WaveNum.text = str(wave)
+	
+func update_monsters(monsters_killed, monsters_num) -> void:
+	$Wave/VBoxContainer/MonsterContainer/Monsters.text = "%d/%d" % [monsters_killed, monsters_num]
 
 func update_score_1(score : int) -> void:
 	$Slime1/ScoreContainer/Score.text = str(score)
