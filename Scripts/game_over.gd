@@ -7,6 +7,7 @@ var time = 0.0
 var winner = 1
 var new_best = false
 var mode = 1
+var wave = 1
 
 var menu_click = false
 var restart_click = false
@@ -17,12 +18,11 @@ func _ready() -> void:
 	
 	$Crown.visible = mode == 2
 	$Firework.visible = mode == 2 or new_best
-	$NewBest.visible = new_best
 	
-	$Firework2.visible = mode == 2 
+	if mode == 2:
+		$NewBest/Label.text = "MVP"
 	
-	if mode == 1:
-		$Label2.text = "Game Over"
+	
 	
 	$Blue.visible = winner == 1
 	$Red.visible = winner == 2
@@ -34,7 +34,7 @@ func _ready() -> void:
 	$StatsContainer/KillsNum.text = str(kills)
 	$StatsContainer/CoinsCollected.text = str(coins)
 	
-
+	$Label2.text = "Wave %d" % wave
 
 
 func _on_restart_click() -> void:

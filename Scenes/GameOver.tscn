@@ -203,13 +203,13 @@ texture = ExtResource("2_bdvmp")
 
 [node name="Blue" type="AnimatedSprite2D" parent="."]
 z_index = 200
-position = Vector2(-1.78814e-07, -177)
+position = Vector2(0, -164)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_yre8s")
 
 [node name="Red" type="AnimatedSprite2D" parent="."]
 z_index = 200
-position = Vector2(-1.78814e-07, -177)
+position = Vector2(0, -164)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_6lffh")
 
@@ -225,7 +225,7 @@ texture = ExtResource("7_2k6ru")
 
 [node name="Crown" type="Sprite2D" parent="."]
 z_index = 200
-position = Vector2(32, -104)
+position = Vector2(32, -91)
 rotation = 0.450295
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("8_4u0g4")
@@ -262,32 +262,27 @@ z_index = 200
 position = Vector2(151, -77)
 texture = ExtResource("15_i4swy")
 
-[node name="Firework2" type="Sprite2D" parent="."]
-z_index = 200
-position = Vector2(-129, -73)
-texture = ExtResource("15_i4swy")
-
 [node name="Label2" type="Label" parent="."]
 z_index = 200
 layout_mode = 0
-offset_left = -247.0
-offset_top = -183.0
-offset_right = 244.0
-offset_bottom = -112.0
+offset_left = -245.0
+offset_top = -173.0
+offset_right = 246.0
+offset_bottom = -102.0
 theme_override_colors/font_color = Color(0.80284, 0.989162, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("9_o0v5y")
 theme_override_font_sizes/font_size = 70
-text = "winner"
+text = "Wave 1"
 horizontal_alignment = 1
 
 [node name="StatsContainer" type="HBoxContainer" parent="."]
 z_index = 200
 layout_mode = 0
 offset_left = -256.0
-offset_top = 3.0
+offset_top = 7.0
 offset_right = 249.0
-offset_bottom = 35.0
+offset_bottom = 39.0
 alignment = 1
 
 [node name="Score" type="Label" parent="StatsContainer"]
@@ -358,10 +353,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -2081.0
-offset_top = -1266.0
-offset_right = 223.0
-offset_bottom = 30.0
+offset_left = -2113.0
+offset_top = -1062.0
+offset_right = 191.0
+offset_bottom = 234.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
