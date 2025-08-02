@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://honmioa12jm3"]
+[gd_scene load_steps=37 format=3 uid="uid://honmioa12jm3"]
 
 [ext_resource type="Script" uid="uid://xq7bc3lae7vo" path="res://Scripts/ui.gd" id="1_w371h"]
 [ext_resource type="Texture2D" uid="uid://bxpwa66g7p1k2" path="res://Assets/GUI/upgrade/time.png" id="2_nxvpl"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bi1pqm6ske2ja" path="res://Assets/Player/Blue_Slime/Animation/Idle.png" id="5_qwshj"]
 [ext_resource type="Texture2D" uid="uid://c2b5oekuvioru" path="res://Assets/Player/Red_Slime/Animation/Idle.png" id="6_48q88"]
 [ext_resource type="Texture2D" uid="uid://u7hwy1ku5ox5" path="res://Assets/Art/coin.png" id="6_vqx31"]
+[ext_resource type="AudioStream" uid="uid://yk4kvg5c11fc" path="res://Assets/musics/clear.mp3" id="10_vqx31"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_48q88"]
 atlas = ExtResource("5_qwshj")
@@ -42,6 +43,38 @@ region = Rect2(768, 0, 128, 128)
 atlas = ExtResource("5_qwshj")
 region = Rect2(896, 0, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_68ajo"]
+atlas = ExtResource("6_48q88")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iufls"]
+atlas = ExtResource("6_48q88")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8rtp"]
+atlas = ExtResource("6_48q88")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_612k1"]
+atlas = ExtResource("6_48q88")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_us6mg"]
+atlas = ExtResource("6_48q88")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8blbl"]
+atlas = ExtResource("6_48q88")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bb0on"]
+atlas = ExtResource("6_48q88")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wijgc"]
+atlas = ExtResource("6_48q88")
+region = Rect2(896, 0, 128, 128)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_wi7yl"]
 animations = [{
 "frames": [{
@@ -71,6 +104,35 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68ajo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iufls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b8rtp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_612k1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_us6mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8blbl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bb0on")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wijgc")
+}],
+"loop": true,
+"name": &"red",
 "speed": 10.0
 }]
 
@@ -166,6 +228,10 @@ layout_mode = 2
 [node name="Time" type="Label" parent="Time/TimeContainer"]
 z_index = 2
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("3_dewlx")
 theme_override_font_sizes/font_size = 30
 text = "0"
@@ -194,6 +260,10 @@ texture = ExtResource("4_wunin")
 [node name="LifePoint" type="Label" parent="Slime1/StatsContainer"]
 z_index = 1
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("3_dewlx")
 theme_override_font_sizes/font_size = 25
 text = "0"
@@ -211,6 +281,10 @@ expand_mode = 2
 [node name="KillsNum" type="Label" parent="Slime1/StatsContainer"]
 z_index = 1
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("3_dewlx")
 theme_override_font_sizes/font_size = 25
 text = "0"
@@ -227,6 +301,10 @@ texture = ExtResource("6_vqx31")
 [node name="CoinsCollected" type="Label" parent="Slime1/StatsContainer"]
 z_index = 1
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("3_dewlx")
 theme_override_font_sizes/font_size = 25
 text = "0"
@@ -244,6 +322,7 @@ expand_mode = 1
 z_index = 1
 position = Vector2(36, -65)
 sprite_frames = SubResource("SpriteFrames_wi7yl")
+animation = &"red"
 
 [node name="ScoreContainer" type="HBoxContainer" parent="Slime1"]
 layout_mode = 0
@@ -255,6 +334,10 @@ offset_bottom = 3.0
 [node name="ScoreLabel" type="Label" parent="Slime1/ScoreContainer"]
 z_index = 1
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("3_dewlx")
 theme_override_font_sizes/font_size = 30
 text = "Score: "
@@ -266,6 +349,10 @@ layout_mode = 2
 [node name="Score" type="Label" parent="Slime1/ScoreContainer"]
 z_index = 1
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("3_dewlx")
 theme_override_font_sizes/font_size = 30
 text = "0"
@@ -299,6 +386,10 @@ expand_mode = 2
 [node name="LifePoint" type="Label" parent="Slime2/StatsContainer"]
 z_index = 1
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("3_dewlx")
 theme_override_font_sizes/font_size = 25
 text = "0"
@@ -316,6 +407,10 @@ expand_mode = 2
 [node name="KillsNum" type="Label" parent="Slime2/StatsContainer"]
 z_index = 1
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("3_dewlx")
 theme_override_font_sizes/font_size = 25
 text = "0"
@@ -332,6 +427,10 @@ texture = ExtResource("6_vqx31")
 [node name="CoinsCollected" type="Label" parent="Slime2/StatsContainer"]
 z_index = 1
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("3_dewlx")
 theme_override_font_sizes/font_size = 25
 text = "0"
@@ -361,6 +460,10 @@ offset_bottom = 3.0
 [node name="ScoreLabel" type="Label" parent="Slime2/ScoreContainer"]
 z_index = 1
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("3_dewlx")
 theme_override_font_sizes/font_size = 30
 text = "Score:"
@@ -372,6 +475,111 @@ layout_mode = 2
 [node name="Score" type="Label" parent="Slime2/ScoreContainer"]
 z_index = 1
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("3_dewlx")
 theme_override_font_sizes/font_size = 30
 text = "0"
+
+[node name="Wave" type="ColorRect" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -88.0
+offset_top = 10.0
+offset_right = 20.0
+offset_bottom = 46.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+color = Color(1, 1, 1, 0)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Wave"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WaveContainter" type="HBoxContainer" parent="Wave/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="WaveLabel" type="Label" parent="Wave/VBoxContainer/WaveContainter"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 40
+text = "Wave: "
+
+[node name="WaveNum" type="Label" parent="Wave/VBoxContainer/WaveContainter"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 40
+text = "1"
+
+[node name="MonsterContainer" type="HBoxContainer" parent="Wave/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Monsters" type="Label" parent="Wave/VBoxContainer/MonsterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 40
+text = "0/5"
+
+[node name="ClearLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.0
+offset_top = -72.5
+offset_right = 92.0
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 70
+text = "Clear
+"
+horizontal_alignment = 1
+
+[node name="WaveLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -262.0
+offset_top = -72.0
+offset_right = 254.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 70
+text = "Wave
+"
+horizontal_alignment = 1
+
+[node name="Clear" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_vqx31")
+bus = &"Sound"
