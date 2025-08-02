@@ -77,19 +77,9 @@ var monsters_num = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Node2D/Monster.die.connect(monster_die)
-	get_berserk.connect($Node2D/Monster.set_slime_pos)
-	$Node2D/Monster2.die.connect(monster_die)
-	get_berserk.connect($Node2D/Monster2.set_slime_pos)
-	$Node2D/Monster3.die.connect(monster_die)
-	get_berserk.connect($Node2D/Monster3.set_slime_pos)
-	$Node2D/Monster4.die.connect(monster_die)
-	get_berserk.connect($Node2D/Monster4.set_slime_pos)
-	
 	AudioManager.play_random_ingame()
 	var background = $Background
 	var d = randi() % 10 + 1
-	d = 10
 	background.texture = load("res://Assets/backgrounds/%d.png" % d)
 	
 	
