@@ -8,14 +8,13 @@ var has_moved = false
 
 var has_click_setting = false
 var has_click_htp = false
+var has_click_start = false
 
 const SETTINGS_PATH = "user://settings.save"
 
 func _ready() -> void:
-	$SettingButton.need_to_wait = false
 	$Instructions.need_to_wait = false
-	$Start.need_to_wait = false
-	$Start.play_sound = false
+
 	AudioManager.play_theme_song()
 	if FileAccess.file_exists(SETTINGS_PATH):
 		var file = FileAccess.open(SETTINGS_PATH, FileAccess.READ)
@@ -32,6 +31,8 @@ func _ready() -> void:
 					AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), !Global.sound)
 				if "score" in data:
 					Global.best_score = data["score"]
+				if "wave" in data:
+					Global.best_wave = data["wave"]
 				if "kills" in data:
 					Global.best_kills = data["kills"]
 				if "coins" in data:
@@ -42,9 +43,9 @@ func _ready() -> void:
 
 
 func _on_start_click() -> void:
-	$Start.disabled = true
-	$Click.play()
-	await $Click.finished
+	if has_click_start:
+		return
+	has_click_start = true
 	get_tree().change_scene_to_file("res://Scenes/PlayerModeSelect.tscn")
 
 func setting_close():
