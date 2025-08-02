@@ -15,6 +15,7 @@ func _ready() -> void:
 	$Red.get_node("AnimatedSprite2D").play("default")
 	
 	$Control.visible = Global.best_score > 0
+	$Control/StatsContainer/Wave.text = "Wave  %d." % Global.best_wave
 	$Control/Score.text = "Highscore: %d" % Global.best_score 
 	$Control/StatsContainer/Time.text = "%3.1f" % Global.best_time
 	$Control/StatsContainer/KillsNum.text = str(Global.best_kills)
