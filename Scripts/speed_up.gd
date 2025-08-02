@@ -8,7 +8,6 @@ var disappear = false
 var rotate_back_ward = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print('ready')
 	start_rotation()
 	pass # Replace with function body.
 
