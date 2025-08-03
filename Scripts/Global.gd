@@ -8,8 +8,8 @@ var best_coins = 0
 var best_time = 0
 var best_wave = 1
 
-var music = false
-var sound = false
+var music = true
+var sound = true
 
 func toggle_music() :
 	music = !music
