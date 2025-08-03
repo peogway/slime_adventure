@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://bkbmwduxbkpi6"]
+[gd_scene load_steps=50 format=3 uid="uid://bkbmwduxbkpi6"]
 
 [ext_resource type="Script" uid="uid://6kxjn6ghxl5h" path="res://Scripts/how_to_play.gd" id="1_wbcyv"]
 [ext_resource type="Texture2D" uid="uid://cmny28217uflm" path="res://Assets/GUI/settings/bg.png" id="2_r8rx6"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://c2b5oekuvioru" path="res://Assets/Player/Red_Slime/Animation/Idle.png" id="20_2bqsr"]
 [ext_resource type="Texture2D" uid="uid://ba5xsd52tqt41" path="res://Assets/keys_instruction/line.png" id="21_2bqsr"]
 [ext_resource type="AudioStream" uid="uid://cnacqddmh1ans" path="res://Assets/Sounds/others/mouse-click.mp3" id="23_hg86a"]
+[ext_resource type="Texture2D" uid="uid://ci7ia1wpufe06" path="res://Assets/keys_instruction/enter.png" id="26_twhdt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hg86a"]
 size = Vector2(1236, 941)
@@ -600,10 +601,10 @@ text = "Attack
 [node name="Options" type="Label" parent="."]
 z_index = 25
 layout_mode = 0
-offset_left = 412.0
-offset_top = -91.0
-offset_right = 542.0
-offset_bottom = -20.0
+offset_left = 395.0
+offset_top = -90.0
+offset_right = 525.0
+offset_bottom = -19.0
 theme_override_colors/font_color = Color(0.80284, 0.989162, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
@@ -614,7 +615,7 @@ text = "Options"
 
 [node name="Escape-sign" type="Sprite2D" parent="."]
 z_index = 25
-position = Vector2(468, -29)
+position = Vector2(404, -31)
 texture = ExtResource("6_l4nhs")
 
 [node name="1p" type="Node2D" parent="."]
@@ -804,6 +805,25 @@ libraries = {
 [node name="Click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("23_hg86a")
 bus = &"Sound"
+
+[node name="Slash" type="Label" parent="."]
+z_index = 25
+offset_left = 443.0
+offset_top = -52.0
+offset_right = 507.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("5_1l8uj")
+theme_override_font_sizes/font_size = 28
+text = "/"
+
+[node name="Enter" type="Sprite2D" parent="."]
+z_index = 25
+position = Vector2(497, -30)
+texture = ExtResource("26_twhdt")
 
 [connection signal="mouse_entered" from="TextureButton" to="." method="_on_texture_button_mouse_entered"]
 [connection signal="mouse_exited" from="TextureButton" to="." method="_on_texture_button_mouse_exited"]
