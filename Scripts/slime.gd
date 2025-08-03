@@ -196,9 +196,13 @@ func handle_input_1_player() -> void:
 		create_jump_effect()
 		jump_combo -= 1
 		velocity.y = JUMP_VELOCITY
-	if Input.is_action_just_pressed("down_single") and is_on_floor():
-		collision.disabled = true
-		position.y +=  8
+	if Input.is_action_just_pressed("down_single"):
+		if is_on_floor():
+			collision.disabled = true
+			position.y +=  8
+		else:
+			velocity.y += 800
+	
 	
 
 func handle_input_2_players() -> void:
@@ -219,9 +223,12 @@ func handle_input_2_players() -> void:
 		create_jump_effect()
 		jump_combo -= 1
 		velocity.y = JUMP_VELOCITY
-	if Input.is_action_just_pressed("move_down_p%d" % player_id) and is_on_floor():
-		collision.disabled = true
-		position.y +=  8
+	if Input.is_action_just_pressed("move_down_p%d" % player_id):
+		if is_on_floor():
+			collision.disabled = true
+			position.y +=  8
+		else:
+			velocity.y += 800
 
 
 func get_speed():
