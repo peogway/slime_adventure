@@ -297,7 +297,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
 text = "/"
 
@@ -312,7 +311,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
 text = "/"
 
@@ -327,7 +325,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
 text = "/"
 
@@ -342,7 +339,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
 text = "/"
 
@@ -357,7 +353,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
 text = "/
 "
@@ -373,7 +368,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
 text = "/"
 
@@ -396,7 +390,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
 text = "/"
 
@@ -411,7 +404,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
 text = "/"
 
@@ -426,7 +418,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
 text = "/"
 
@@ -441,7 +432,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
 text = "/"
 
@@ -456,7 +446,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
 text = "/
 "
@@ -472,7 +461,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
 text = "/"
 
@@ -808,6 +796,7 @@ bus = &"Sound"
 
 [node name="Slash" type="Label" parent="."]
 z_index = 25
+layout_mode = 0
 offset_left = 443.0
 offset_top = -52.0
 offset_right = 507.0
@@ -816,7 +805,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("5_1l8uj")
 theme_override_font_sizes/font_size = 28
 text = "/"
 

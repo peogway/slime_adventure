@@ -528,7 +528,7 @@ text = "1"
 layout_mode = 2
 alignment = 1
 
-[node name="Monsters" type="Label" parent="Wave/VBoxContainer/MonsterContainer"]
+[node name="MonstersKilled" type="Label" parent="Wave/VBoxContainer/MonsterContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -536,7 +536,30 @@ theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("3_dewlx")
 theme_override_font_sizes/font_size = 40
-text = "0/5"
+text = "0"
+
+[node name="Slash" type="Label" parent="Wave/VBoxContainer/MonsterContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 25
+text = "/"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MonstersTotal" type="Label" parent="Wave/VBoxContainer/MonsterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("3_dewlx")
+theme_override_font_sizes/font_size = 40
+text = "5"
 
 [node name="ClearLabel" type="Label" parent="."]
 anchors_preset = 8
