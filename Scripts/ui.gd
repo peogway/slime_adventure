@@ -41,7 +41,8 @@ func update_wave(wave: int) -> void:
 	$Wave/VBoxContainer/WaveContainter/WaveNum.text = str(wave)
 	
 func update_monsters(monsters_killed, monsters_num) -> void:
-	$Wave/VBoxContainer/MonsterContainer/Monsters.text = "%d/%d" % [monsters_killed, monsters_num]
+	$Wave/VBoxContainer/MonsterContainer/MonstersKilled.text = str(monsters_killed)
+	$Wave/VBoxContainer/MonsterContainer/MonstersTotal.text = str(monsters_num)
 
 func update_score_1(score : int) -> void:
 	$Slime1/ScoreContainer/Score.text = str(score)
