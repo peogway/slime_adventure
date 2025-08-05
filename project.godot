@@ -10,10 +10,12 @@ config_version=5
 
 [application]
 
-config/name="slme_adventure"
+config/name="Slime Adventure"
 run/main_scene="uid://bjyajyyylskln"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="uid://eae1oj1yn3d4"
+boot_splash/bg_color=Color(0.662, 0.662, 0.662, 0.7)
+boot_splash/image="uid://cjemetfnxmucs"
+config/icon="uid://cjemetfnxmucs"
 
 [audio]
 
@@ -23,6 +25,12 @@ buses/icon="uid://eae1oj1yn3d4"
 
 Global="*res://Scripts/Global.gd"
 AudioManager="*res://Scripts/audio_manager.gd"
+
+[display]
+
+window/size/mode=3
+mouse_cursor/custom_image="uid://ffb4wxg38sjo"
+mouse_cursor/custom_image_hotspot=Vector2(13, 13)
 
 [input]
 
@@ -166,3 +174,4 @@ down_single={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_2d=3
