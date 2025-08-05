@@ -154,6 +154,7 @@ texture = ExtResource("3_ydguf")
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("4_vfpf0")
 
 [node name="Bg" type="Sprite2D" parent="."]

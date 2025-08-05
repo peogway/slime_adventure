@@ -30,6 +30,7 @@ script = ExtResource("1_w3jyv")
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_t1xxt")
 
 [node name="Camera2D" type="Camera2D" parent="."]
