@@ -32,7 +32,7 @@ var is_hurt = false
 @onready var animated_player = $AnimationPlayer
 
 var dropped = false
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -500.0
 var go_down = false
 
 
@@ -50,8 +50,13 @@ var can_jump = true
 var floor_time = 0
 var reached = false
 
+const FLIP_TIME = 2
+var last_flip = 2
+
 
 func _ready() -> void:
+	if randi() % 2 == 0:
+		flip()
 	var addition_speed = randi() % 30 + 1
 	if randi() % 2 == 0:
 		speed += addition_speed
@@ -64,6 +69,7 @@ func _ready() -> void:
 	monster = randi() % monsters_move_list.size()
 
 func _process(delta: float) -> void:
+	last_flip += delta
 	if touch_player:
 		touch_time -= delta
 		if touch_time <= 0:
@@ -77,6 +83,8 @@ func set_slime_pos(pos, recent_die: bool):
 	tem_slime_pos = pos
 	if tem_slime_pos == null:
 		slime_pos = null
+	else:
+		horizontal_direction = sign(tem_slime_pos.x - position.x)
 	
 func _physics_process(delta: float) -> void:
 	if currentHealth <= 0:
@@ -102,8 +110,7 @@ func _physics_process(delta: float) -> void:
 		floor_time += delta
 		falling_too_far = false
 		slime_pos = tem_slime_pos
-		if slime_pos:
-			horizontal_direction = sign(slime_pos.x - position.x)
+			
 		go_down = false
 		$Sprite2D.visible = false
 		if !dropped:
@@ -158,8 +165,8 @@ func _physics_process(delta: float) -> void:
 
 func handle_physics_berserk():
 	var height = (JUMP_VELOCITY * JUMP_VELOCITY) / (2 * get_gravity().y)	
-	if position.y -51 < slime_pos.y:
-		if (horizontal_direction > 0 and facing_left) or (horizontal_direction < 0 and !facing_left):
+	if position.y < slime_pos.y:
+		if ((horizontal_direction >= 0 and facing_left) or (horizontal_direction <= 0 and !facing_left)) and last_flip >= FLIP_TIME:
 			flip()
 			
 		if !is_on_floor() and !go_down and abs(position.x - slime_pos.x) >= 200:
@@ -172,17 +179,17 @@ func handle_physics_berserk():
 				position.y += 8
 		velocity.x = berserk_speed
 	
-	elif height <= position.y - 31 - slime_pos.y:
-		if (!ray_vertical.is_colliding() and is_on_floor()) or ray_horizontal.is_colliding():
+	elif height <= position.y - slime_pos.y:
+		if ((!ray_vertical.is_colliding() and is_on_floor()) or ray_horizontal.is_colliding()):
 			flip()
 		velocity.x = berserk_speed
 	else:
-		if !is_on_floor() or ( position.y -31 > slime_pos.y ):
+		if !is_on_floor() or  (abs(position.x - slime_pos.x) >= 200 and position.y - slime_pos.y >= 50):
 			if jump > 0:
 				delay_jump = TIME_DELAY_JUMP
 				jump -= 1
 				velocity.y += JUMP_VELOCITY	
-		if (horizontal_direction > 0 and facing_left) or (horizontal_direction < 0 and !facing_left) :
+		if (((horizontal_direction >= 0 and facing_left) or (horizontal_direction <= 0 and !facing_left))) and last_flip >= FLIP_TIME:
 			flip()
 		velocity.x = berserk_speed
 		
@@ -197,6 +204,7 @@ func handle_physics_berserk():
 	
 
 func flip():
+	last_flip = 0
 	facing_left = !facing_left
 	
 	scale.x *= -1

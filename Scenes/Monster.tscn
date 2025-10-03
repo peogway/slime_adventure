@@ -205,15 +205,17 @@ script = ExtResource("1_yyra8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_wp20p")
+position = Vector2(-1, -27)
 sprite_frames = SubResource("SpriteFrames_yyra8")
 animation = &"worm_stop"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 19)
+position = Vector2(0, -8)
 rotation = 4.71239
 shape = SubResource("CapsuleShape2D_brqr3")
 
 [node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(-1, -27)
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
@@ -222,30 +224,31 @@ rotation = 4.71239
 shape = SubResource("CapsuleShape2D_wqfq0")
 
 [node name="RayVertical" type="RayCast2D" parent="."]
-position = Vector2(-23, -9)
+position = Vector2(-24, -36)
 rotation = 0.436332
 target_position = Vector2(5.11783, 58.2993)
 
 [node name="RayHorizontal" type="RayCast2D" parent="."]
-position = Vector2(17, 7)
+position = Vector2(16, -20)
 rotation = 1.5708
 scale = Vector2(0.95, 0.95)
 
 [node name="RayBody" type="RayCast2D" parent="."]
-position = Vector2(15.5, 17)
+position = Vector2(14.5, -10)
 rotation = 1.5708
 scale = Vector2(0.58, 0.58)
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." node_paths=PackedStringArray("monster")]
-offset_left = -34.0
-offset_top = -18.0
-offset_right = 30.0
-offset_bottom = 22.0
+offset_left = -35.0
+offset_top = -45.0
+offset_right = 29.0
+offset_bottom = -5.0
 value = 100.0
 texture_under = ExtResource("3_fvjcv")
 texture_progress = ExtResource("4_i0esf")
 script = ExtResource("5_wp20p")
 monster = NodePath("..")
+metadata/_edit_use_anchors_ = true
 
 [node name="HurtTimer" type="Timer" parent="."]
 
@@ -255,17 +258,18 @@ libraries = {
 }
 
 [node name="Effect" type="Node2D" parent="."]
+position = Vector2(-1, -27)
 
 [node name="ChestDrop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_vqjk1")
 bus = &"Sound"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1, -28)
+position = Vector2(-2, -55)
 texture = ExtResource("8_rof6c")
 
 [node name="Warning" type="Sprite2D" parent="."]
-position = Vector2(-41, -9)
+position = Vector2(-42, -36)
 rotation = -0.427606
 texture = ExtResource("9_rof6c")
 
